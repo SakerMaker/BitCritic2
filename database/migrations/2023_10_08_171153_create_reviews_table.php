@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->string("title",255);
-            $table->text("content");
-            $table->string("image");
+            $table->unsignedBigInteger('id_game');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->string('title',255);
+            $table->string('content');
             $table->timestamps();
         });
     }

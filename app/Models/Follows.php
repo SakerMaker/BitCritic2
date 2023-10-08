@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Follows extends Model
 {
     use HasFactory;
 
     static $rules = [
-		'id_game' => 'required',
-		'id_user' => 'required',
-        'title' => 'required|max:255',
-        'content' => 'required',
+		'id_user_followed' => 'required',
+		'id_user_following' => 'required',
     ];
-    
+
     protected $fillable = [
-        'id_game','id_user', 'title', 'content', 'rate',
+        'id_user_followed','id_user_following',
     ];
 
 }

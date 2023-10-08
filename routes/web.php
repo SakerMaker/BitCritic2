@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Index
-Route::get('/')->name('index'); //Index
+Route::get('/',function() {
+    return view('welcome');
+})->name('index'); //Index
 
 //Games
 Route::get('/games'); //List of games
