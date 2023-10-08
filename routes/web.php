@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Index
+Route::get('/')->name('index'); //Index
+
+//Games
+Route::get('/games'); //List of games
+Route::get('/games/1'); //Certain game
+
+//Reviews
+Route::get('/reviews/1', [ReviewController::class, 'index']); //Certain review
+
+//Users
+Route::get('/user/1'); //Certain user
 
 Route::middleware([
     'auth:sanctum',
