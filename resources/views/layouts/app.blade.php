@@ -19,7 +19,7 @@
     <body>
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-vh-100 bg-dark">
 
             @include('nav', ["current_page" => Route::current()->getName()]) 
 
