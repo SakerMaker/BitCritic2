@@ -16,29 +16,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Index
+
 // Route::get('/',function() {
 //     return view('welcome');
 // })->name('index'); //Index
-
+//Index
 Route::get('/', [IndexController::class, 'index'])->name('index');
+
+//Reviews
+// Route::get('/reviews/1', [ReviewController::class, 'index']); //Certain review
 
 //Games
 Route::get('/games', [GameController::class, 'index'])->name("games"); //List of games
-Route::get('/games/1'); //Certain game
-
-//Reviews
-Route::get('/reviews/1', [ReviewController::class, 'index']); //Certain review
 
 //Users
-Route::get('/user/1'); //Certain user
+// Route::get('/user/1'); //Certain user
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/user/{name}', function () {
+        return view('user.profile');
+    })->name('user.profile');
 });

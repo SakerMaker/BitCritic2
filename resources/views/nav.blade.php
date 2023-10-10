@@ -35,7 +35,7 @@
                                 {{ __('Ajustes') }}
                             </div>
     
-                            <x-dropdown-link href="{{ route('profile.show') }}">
+                            <x-dropdown-link href="{{ route('user.profile',Auth::user()->name) }}">
                                 <span class="span-text">{{ __('Mi Perfil') }}</span>
                             </x-dropdown-link>
     

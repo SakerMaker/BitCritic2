@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Inicio de Sesión
+    Iniciar Sesión
 @endsection
 
 @section('content')
