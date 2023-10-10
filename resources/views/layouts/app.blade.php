@@ -5,38 +5,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'BitCritic - Video Game Review Community') }}</title>
+        <title>{{ config('app.name', 'BitCritic') }} - @yield('template_title') - Video Game Review Community</title>
 
         <!-- Fonts -->
         <link rel="shortcut icon" href="{{url("/favicon.ico")}}" type="image/x-icon">
-        <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
+        
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body>
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+            @include('nav', ["current_page" => Route::current()->getName()]) 
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                @yield('content')
             </main>
+
+            @include("footer")
+            
         </div>
 
         @stack('modals')

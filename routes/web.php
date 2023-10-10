@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Web\ReviewController;
 use Illuminate\Support\Facades\Route;
@@ -16,14 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Index
-Route::get('/',function() {
-    return view('welcome');
-})->name('index'); //Index
+// Route::get('/',function() {
+//     return view('welcome');
+// })->name('index'); //Index
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
 //Games
-Route::get('/games'); //List of games
+Route::get('/games', [GameController::class, 'index'])->name("games"); //List of games
 Route::get('/games/1'); //Certain game
 
 //Reviews

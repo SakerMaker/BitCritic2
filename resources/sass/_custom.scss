@@ -1,0 +1,50 @@
+.logo {
+    &--static {
+        display:inline-block;
+    }
+
+    &--spin {
+        display:none;
+    }
+}
+
+.navbar-brand {
+    &:hover {
+        .logo--static {
+            display:none;
+        }
+        .logo--spin {
+            display:inline-block;
+        }
+    }
+}
+
+.nav-item {
+    margin-left: 1.5rem;
+    .nav-link {
+    
+        &--active {
+            color: $blue--active;
+            &:hover {
+                color: $white;
+            }
+        }
+        &--profile-picture {
+            box-sizing: content-box;
+            width:50px;
+            height:50px;
+            object-fit: cover;
+            overflow: hidden;
+            img {
+                overflow-clip-margin: content-box;
+                overflow: clip;
+                width:50px;
+                height:50px;
+            }
+        }
+    }
+}
+
+.span-text {
+    font-weight:$font-weight-base;
+}
