@@ -1,8 +1,8 @@
 <footer class="bg-dark py-4 mt-auto">
     <div class="container px-5">
-        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+        <div class="d-flex align-items-center justify-content-between flex-column flex-md-row text-lg-start text-center">
             <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; BitCritic 2023</div></div>
-            <div class="col-auto">
+            <div class="col-auto sm-text-center">
                 {{-- <a class="link-light small" href="https://forms.gle/nEm4ERmr5WGV5uFG8" target="_blank">Recomendar Juego</a> --}}
                 <a class="link-light small" href="{{ Route('policy.show') }}" target="_blank">Política de Privacidad</a>
                 <span class="text-white mx-1">&middot;</span>
