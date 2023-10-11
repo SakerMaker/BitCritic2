@@ -16,24 +16,35 @@
                     </div>
                     <div class="ms-3" style="margin-top: 130px;">
                       <h5 style="text-shadow: #000000ab 2px 5px 10px">{{$user->name}}</h5>
-                      <p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-geo-alt-fill"></i> {{$user->location}}</p>
+                      <div class="d-flex gap-4">
+                            @if(isset($user->location))<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-geo-alt-fill"></i> {{$user->location}}</p>@else<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-geo-alt-fill opacity-100"></i> <span class="opacity-50"></span> @endif
+                            @if(isset($user->birthday))<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-calendar-heart-fill"></i> {{$user->birthday}}</p>@else<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-calendar-heart-fill"></i> <span class="opacity-50"></span> @endif
+                      </div>
                     </div>
                   </div>
-                  <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                  <div class="p-4 text-black d-flex justify-content-between align-items-center flex-wrap" style="background-color: #f8f9fa;">
                     @if (Auth::id()==$user->id)
                       <a href="{{Route('profile.show')}}" type="button" class="btn btn-outline-dark mt-2" style="width:150px;" data-mdb-ripple-color="dark"
                         style="z-index: 1;">
                         Editar Perfil
                     </a>
                     @endif
-                    <div class="d-flex justify-content-end text-center py-1">
+                    <div class="d-flex justify-content-end text-center py-1 mt-sm-4" style="float:right;">
                     <div>
-                      <p class="mb-1 h5">{{--$reviews--}}0</p>
+                      <p class="mb-1 h5">{{$reviews}}</p>
                       <p class="small text-muted mb-0">Reviews</p>
                     </div>
                     <div class="px-3">
-                      <p class="mb-1 h5">{{--$comment--}}0</p>
+                      <p class="mb-1 h5">{{$comments}}</p>
                       <p class="small text-muted mb-0">Comentarios</p>
+                    </div>
+                    <div class="px-3">
+                      <p class="mb-1 h5">{{$likes}}</p>
+                      <p class="small text-muted mb-0">Likes</p>
+                    </div>
+                    <div class="px-3">
+                      <p class="mb-1 h5">{{$followers}}</p>
+                      <p class="small text-muted mb-0">Seguidores</p>
                     </div>
                   </div>
                 </div>

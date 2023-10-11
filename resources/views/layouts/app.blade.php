@@ -25,7 +25,7 @@
             @include('nav', ["current_page" => Route::current()->getName()]) 
 
             <!-- Page Content -->
-            <main class="main-content-view bg-dark">
+            <main class="main-content-view bg-dark" style="min-height:73vh;">
                 {{ $slot }}
             </main>
 
