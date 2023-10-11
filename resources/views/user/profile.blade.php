@@ -8,9 +8,9 @@
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-lg-12 col-xl-12">
               <div class="card">
-                <div class="rounded-top text-white d-flex flex-row" style="background: url({{url("/storage/".$user->banner_photo_path)}}); height:200px; background-size:cover;background-position:center center;">
+                <div class="rounded-top text-white d-flex flex-row" style="background: url(@if (str_contains($user->banner_photo_path, 'Banner-Default')){{url($user->banner_photo_path)}}@else{{url("/storage/".$user->banner_photo_path)}}@endif); height:200px; background-size:cover;background-position:center center;">
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;min-height:150px;">
-                    <img src="{{ url("/storage/".$user->profile_photo_path) }}"
+                    <img src="@if (str_contains($user->profile_photo_path, 'Profile-Picture-Default')){{url($user->profile_photo_path)}}@else{{url("/storage/".$user->profile_photo_path)}}@endif"
                       alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                       style="width: 150px!important; min-height:150px;z-index: 1;object-fit:cover;">
                     </div>
