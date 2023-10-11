@@ -13,6 +13,9 @@
         
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+        <!-- Styles -->
+        @livewireStyles
     </head>
     <body class="min-vh-100 bg-dark">
         <x-banner />
