@@ -1,3 +1,7 @@
+@section('template_title')
+    Inicio
+@endsection
+
 <x-app-layout>
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
