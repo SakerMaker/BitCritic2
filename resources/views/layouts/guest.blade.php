@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link rel="shortcut icon" href="{{url("/favicon.ico")}}" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
         
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -21,7 +22,7 @@
             @include('nav', ["current_page" => Route::current()->getName()]) 
 
             <!-- Page Content -->
-            <main class="main-content-view bg-dark" style="min-height:73vh;">
+            <main class="main-content-view bg-dark">
                 {{ $slot }}
             </main>
 

@@ -7,7 +7,7 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img class="bd-placeholder-img" width="100%" height="400px" src="{{ url("img/carrousel1.png") }}" aria-hidden="true"
+        <img class="bd-placeholder-img" width="100%" height="400px" src="{{ url("img/BitCritic-Carrousel1-View-Game-Review-Community.png") }}" aria-hidden="true"
           focusable="false" style="object-fit: cover;">
         <div class="container">
           <div class="carousel-caption text-start">
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img class="bd-placeholder-img" width="100%" height="400px" src="{{ url("img/carrousel2.png") }}" aria-hidden="true"
+        <img class="bd-placeholder-img" width="100%" height="400px" src="{{ url("img/BitCritic-Carrousel2-View-Game-Review-Community.png") }}" aria-hidden="true"
           focusable="false" style="object-fit: cover;">
         <div class="container">
           <div class="carousel-caption">
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img class="bd-placeholder-img" width="100%" height="400px" src="{{ url("img/carrousel3.png") }}" aria-hidden="true"
+        <img class="bd-placeholder-img" width="100%" height="400px" src="{{ url("img/BitCritic-Carrousel3-View-Game-Review-Community.png") }}" aria-hidden="true"
           focusable="false" style="object-fit: cover;">
         <div class="container">
           <div class="carousel-caption text-end">

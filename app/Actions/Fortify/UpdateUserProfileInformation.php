@@ -20,11 +20,19 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         Validator::make($input, [
             'name' => ['required', 'string', 'max:16', Rule::unique('users')->ignore($user->id), 'alpha_dash'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'location' => ['nullable', 'string', 'max:16'],
+            'about_me' => ['nullable', 'string', 'max:16383'],
+            'birthday' => ['nullable', 'date'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'banner' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
+        }
+
+        if (isset($input['banner'])) {
+            $user->updateBannerPhoto($input['banner']);
         }
 
         if ($input['email'] !== $user->email &&
@@ -53,4 +61,5 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 
         $user->sendEmailVerificationNotification();
     }
+    
 }
