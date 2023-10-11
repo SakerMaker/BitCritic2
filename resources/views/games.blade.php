@@ -1,8 +1,6 @@
-@extends('layouts.app')
-
 @section('template_title')
     Juegos
 @endsection
 
-@section('content')
-@endsection
+<x-app-layout>
+</x-app-layout>

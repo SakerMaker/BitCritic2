@@ -1,8 +1,7 @@
-@extends('layouts.app')
-
 @section('template_title')
-    Inicio
+    Perfil de {{ $user->name }}
 @endsection
 
-@section('content')
-@endsection
+<x-guest-layout>
+    
+</x-guest-layout>

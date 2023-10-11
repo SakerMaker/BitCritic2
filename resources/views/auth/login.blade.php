@@ -1,10 +1,9 @@
-@extends('layouts.app')
 
 @section('template_title')
-    Iniciar Sesión
+    Inicio de Sesión
 @endsection
 
-@section('content')
+<x-guest-layout>
     <div class="px-4 py-5 px-md-5 text-center text-lg-start d-flex align-items-center justify-content-center bg-dark" style="background-color: hsl(0, 0%, 96%);min-height:78vh;">
         <div class="container">
         <div class="row gx-lg-5 align-items-center mt-10">
@@ -75,4 +74,4 @@
         </div>
         </div>
     </div>
-@endsection
+</x-guest-layout>

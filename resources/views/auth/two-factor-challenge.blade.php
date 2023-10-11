@@ -1,8 +1,5 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
 
         <div x-data="{ recovery: false }">
             <div class="mb-4 text-sm text-gray-600" x-show="! recovery">
@@ -55,15 +52,13 @@
             </form>
         </div>
     </x-authentication-card>
-</x-guest-layout>
-
-@extends('layouts.app')
+</x-guest-layout> --}}
 
 @section('template_title')
-    2FA
+    Código de Autentificación
 @endsection
 
-@section('content')
+<x-guest-layout>
 <div class="px-4 py-4 px-md-5 text-center text-lg-start d-flex align-items-center justify-content-center bg-dark" style="background-color: hsl(0, 0%, 96%);min-height:78vh;">
     <div class="container">
       <div class="row gx-lg-5 align-items-center mt-10">
@@ -90,30 +85,41 @@
                     <div class="mb-4 text-sm text-gray-600" x-cloak x-show="recovery">
                         {{ __('Por favor, confirma el acceso a tu cuenta escribiendo un código de autenticación de emergencia.') }}
                     </div>
-                
-                <div class="flex items-center justify-end mt-4">
-                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
-                                    x-show="! recovery"
-                                    x-on:click="
-                                        recovery = true;
-                                        $nextTick(() => { $refs.recovery_code.focus() })
-                                    ">
-                        {{ __('Use a recovery code') }}
-                    </button>
 
-                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
-                                    x-cloak
-                                    x-show="recovery"
-                                    x-on:click="
-                                        recovery = false;
-                                        $nextTick(() => { $refs.code.focus() })
-                                    ">
-                        {{ __('Use an authentication code') }}
-                    </button>
-
-                    <x-button class="ml-4">
-                        {{ __('Log in') }}
-                    </x-button>
+                    <div class="mt-4" x-show="! recovery">
+                        <x-label for="code" value="{{ __('Code') }}" />
+                        <x-input id="code" class="block mt-1 w-full" type="text" inputmode="numeric" name="code" autofocus x-ref="code" autocomplete="one-time-code" />
+                    </div>
+    
+                    <div class="mt-4" x-cloak x-show="recovery">
+                        <x-label for="recovery_code" value="{{ __('Recovery Code') }}" />
+                        <x-input id="recovery_code" class="block mt-1 w-full" type="text" name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
+                    </div>
+    
+                    <div class="flex items-center justify-end mt-4">
+                        <x-button type="button" class="bg-dark p-3 mb-4 text-white btn text-decoration-none float-right"
+                                        x-show="! recovery"
+                                        x-on:click="
+                                            recovery = true;
+                                            $nextTick(() => { $refs.recovery_code.focus() })
+                                        ">
+                            {{ __('Usar un código de recuperación') }}
+                        </x-button>
+    
+                        <x-button type="button" class="bg-dark p-3 mb-4 text-white btn text-decoration-none float-righ"
+                                        x-cloak
+                                        x-show="recovery"
+                                        x-on:click="
+                                            recovery = false;
+                                            $nextTick(() => { $refs.code.focus() })
+                                        ">
+                            {{ __('Usar un código de autenticación') }}
+                        </x-button>
+    
+                        <x-button class="btn-primary mb-4 p-3 d-block w-100">
+                            {{ __('Iniciar Sesión') }}
+                        </x-button>
+                    </div>
                 </div>
 
               </form>
@@ -123,4 +129,4 @@
       </div>
     </div>
   </div>
-@endsection
+</x-guest-layout>

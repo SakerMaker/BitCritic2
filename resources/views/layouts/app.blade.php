@@ -16,16 +16,16 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body>
+    <body class="min-vh-100 bg-dark">
         <x-banner />
 
-        <div class="min-vh-100 bg-dark">
+        <div>
 
             @include('nav', ["current_page" => Route::current()->getName()]) 
 
             <!-- Page Content -->
-            <main>
-                @yield('content')
+            <main class="main-content-view bg-dark" style="min-height:73vh;">
+                {{ $slot }}
             </main>
 
             @include("footer")

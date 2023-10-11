@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Web\ReviewController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +38,5 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/user/{name}', function () {
-        return view('user.profile');
-    })->name('user.profile');
+    Route::get('/u/{name}', [UserController::class,'show'])->name('user.profile');
 });
