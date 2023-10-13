@@ -17,8 +17,10 @@ class UserController extends Controller
     public function show($name) {
         $user=User::where('name', $name)->firstOrFail();
 
-        $birthday=strtotime($user->birthday);
-        $user->birthday=date('d M. Y',$birthday);
+        if (isset($user->birthday) && NULL !== $user->birthday) {
+            $birthday=strtotime($user->birthday);
+            $user->birthday=date('d M. Y',$birthday);
+        }
 
         $followers=CountProfile::follow_count($user);
         $likes=CountProfile::likes_count($user);
