@@ -14,11 +14,11 @@
                     alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                     style="width: 150px!important; min-height:150px;z-index: 1;object-fit:cover;">
                   </div>
-                  <div class="ms-3" style="margin-top: 130px;">
+                  <div class="ms-3 d-none d-md-block" style="margin-top: 130px;">
                     <h5 style="text-shadow: #000000ab 2px 5px 10px">{{$user->name}}</h5>
                     <div class="d-flex gap-4">
-                          @if(isset($user->location))<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-geo-alt-fill"></i> {{$user->location}}</p>@else<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-geo-alt-fill opacity-100"></i> <span class="opacity-50"></span> @endif
-                          @if(isset($user->birthday))<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-calendar-heart-fill"></i> {{$user->birthday}}</p>@else<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-calendar-heart-fill"></i> <span class="opacity-50"></span> @endif
+                        @if(isset($user->location))<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-geo-alt-fill"></i> {{$user->location}}</p>@else<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-geo-alt-fill opacity-100"></i> <span class="opacity-50"></span> @endif
+                        @if(isset($user->birthday))<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-calendar-heart-fill"></i> {{$user->birthday}}</p>@else<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-calendar-heart-fill"></i> <span class="opacity-50"></span> @endif
                     </div>
                   </div>
                 </div>
@@ -29,7 +29,7 @@
                       Editar Perfil
                   </a>
                   @endif
-                  <div class="d-flex justify-content-end text-center py-1 mt-lg-0 mt-4" style="float:right;">
+                  <div class="d-flex justify-content-end text-center py-1 mt-lg-0 mt-4 d-none d-md-flex" style="float:right;">
                   <div>
                     <p class="mb-1 h5">{{$reviews}}</p>
                     <p class="small text-muted mb-0">Reviews</p>
@@ -45,6 +45,39 @@
                   <div class="px-3">
                     <p class="mb-1 h5">{{$followers}}</p>
                     <p class="small text-muted mb-0">Seguidores</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body pt-4 ps-4 pe-4 mt-4 pb-0 text-black d-md-none d-block">
+                <h5>{{$user->name}}</h5>
+                <div class="d-flex justify-content-between align-items-center align-self-center flex-wrap">
+                  <div class="d-flex gap-1 flex-wrap">
+                    <p class="m-0"><i class="bi bi-geo-alt-fill"></i>
+                      {{ Form::text('location', $user->location, ['class' => 'form-control w-75 d-inline-block mx-3' . ($errors->has('location') ? ' is-invalid' : ''), 'placeholder' => 'Ubicación...']) }}
+                      {!! $errors->first('location', '<div class="invalid-feedback">:message</div>') !!}
+                    </p>
+                    <p class="m-0"><i class="bi bi-calendar-heart-fill"></i>
+                      {{ Form::date('birthday', $user->birthday, ['class' => 'form-control w-75 d-inline-block mx-3' . ($errors->has('birthday') ? ' is-invalid' : ''), 'placeholder' => 'Cumpleaños...']) }}
+                      {!! $errors->first('birthday', '<div class="invalid-feedback">:message</div>') !!}
+                    </p>
+                  </div>
+                  <div class="d-flex justify-content-lg-end justify-content-center text-center py-1 mt-4 mt-lg-0 flex-wrap user-counts" style="float:right;">
+                    <div>
+                      <p class="mb-1 h5">{{$reviews}}</p>
+                      <p class="small text-muted mb-0">Reviews</p>
+                    </div>
+                    <div class="px-3">
+                      <p class="mb-1 h5">{{$comments}}</p>
+                      <p class="small text-muted mb-0">Comentarios</p>
+                    </div>
+                    <div class="px-3">
+                      <p class="mb-1 h5">{{$likes}}</p>
+                      <p class="small text-muted mb-0">Likes</p>
+                    </div>
+                    <div class="px-3">
+                      <p class="mb-1 h5">{{$followers}}</p>
+                      <p class="small text-muted mb-0">Seguidores</p>
+                    </div>
                   </div>
                 </div>
               </div>
