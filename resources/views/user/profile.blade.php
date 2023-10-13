@@ -51,7 +51,7 @@
               <div class="card-body p-4 text-black">
                 <div class="mb-5">
                   <p class="lead fw-normal mb-1">Sobre Mí</p>
-                  <div class="p-4" style="background-color: #f8f9fa;">
+                  <div class="p-4 rounded" style="background-color: #f8f9fa;">
                     <p class="font-italic mb-1">{{$user->about_me}}</p>
                   </div>
                 </div>
