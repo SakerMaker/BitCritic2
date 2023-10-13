@@ -15,7 +15,7 @@
                     style="width: 150px!important; min-height:150px;z-index: 1;object-fit:cover;">
                   </div>
                   <div class="ms-3 d-none d-md-block" style="margin-top: 130px;">
-                    <h5 style="text-shadow: #000000ab 2px 5px 10px">{{$user->name}}</h5>
+                    <h5 style="text-shadow: #000000ab 2px 5px 10px" class="fw-bold">{{$user->name}}</h5>
                     <div class="d-flex gap-4">
                         @if(isset($user->location))<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-geo-alt-fill"></i> {{$user->location}}</p>@else<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-geo-alt-fill opacity-100"></i> <span class="opacity-50"></span> @endif
                         @if(isset($user->birthday))<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-calendar-heart-fill"></i> {{$user->birthday}}</p>@else<p style="text-shadow: #000000ab 2px 5px 10px"><i class="bi bi-calendar-heart-fill"></i> <span class="opacity-50"></span> @endif

@@ -37,7 +37,7 @@
               </div>
             </div>
             <div class="card-body pt-4 ps-4 pe-4 mt-4 pb-0 text-black">
-                <h5>{{$user->name}}</h5>
+                <h5 class="fw-bold">{{$user->name}}</h5>
                 <div class="d-flex justify-content-between align-items-center align-self-center flex-wrap">
                   <div class="d-flex gap-1 flex-wrap">
                     <p class="m-0"><i class="bi bi-geo-alt-fill"></i>
