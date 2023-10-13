@@ -48,8 +48,8 @@
                   </div>
                 </div>
               </div>
-              <div class="card-body ps-4 pe-4 pb-0 text-black d-md-none d-block">
-                <h5>{{$user->name}}</h5>
+              <div class="card-body pd-0 ps-4 pe-4 pb-0 text-black d-md-none d-block">
+                <h5 class="pb-2 pb-md-0 mb-4 fw-bold border-bottom">{{$user->name}}</h5>
                 <div class="d-flex justify-content-between align-items-center align-self-center flex-wrap">
                   <div class="d-flex gap-1 flex-wrap">
                     <p class="m-0"><i class="bi bi-geo-alt-fill"></i>
