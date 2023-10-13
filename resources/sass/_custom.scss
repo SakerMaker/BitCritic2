@@ -107,6 +107,20 @@
     min-height:75vh;
 }
 
+#output2:hover {
+    background-color: #000000;
+    
+}
+#output2:hover, #output2 #file:hover {
+    box-shadow: #00000050 0px 10px 20px;
+    transition:all 0.2s;
+}
+
+#output2:hover .upload-btn-wrapper .btn {
+    background-color: $white;
+    color:$blue!important;
+}
+
 @media (max-width:287px) {
     .order-pfp {
         background-color: alpha($color: #000000);
