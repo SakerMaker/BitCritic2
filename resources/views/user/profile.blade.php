@@ -51,7 +51,7 @@
               <div class="card-body pd-0 ps-4 pe-4 pb-0 text-black d-md-none d-block">
                 <h5 class="pb-2 pb-md-0 mb-4 fw-bold border-bottom">{{$user->name}}</h5>
                 <div class="d-flex justify-content-between align-items-center align-self-center flex-wrap">
-                  <div class="d-flex gap-1 flex-wrap">
+                  <div class="d-flex gap-4 flex-wrap user-icons">
                       @if(isset($user->location))<p><i class="bi bi-geo-alt-fill"></i> {{$user->location}}</p>@endif
                       @if(isset($user->birthday))<p><i class="bi bi-calendar-heart-fill"></i> {{$user->birthday}}</p>@endif
                   </div>
