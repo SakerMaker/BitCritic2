@@ -54,17 +54,17 @@ class UserController extends Controller
         if ($request->hasFile('profile_photo_path')) {
             $file = $request['profile_photo_path'];
             $destinationPath = "storage/profile-photos/";
-            $filename = time() . "-" . $file->getClientOriginalName();
+            $filename = time() . "-" . urlencode($file->getClientOriginalName());
             $uploadSuccess = $request['profile_photo_path']->move($destinationPath, $filename);
-            $user->profile_photo_path="profile-photos/" . $filename;
+            $user->profile_photo_path="profile-photos/" . urlencode($filename);
         }
 
         if ($request->hasFile('banner_photo_path')) {
             $file = $request['banner_photo_path'];
             $destinationPath = "storage/banner-photos/";
-            $filename = time() . "-" . $file->getClientOriginalName();
+            $filename = time() . "-" . urlencode($file->getClientOriginalName());
             $uploadSuccess = $request['banner_photo_path']->move($destinationPath, $filename);
-            $user->banner_photo_path="banner-photos/" . $filename;
+            $user->banner_photo_path="banner-photos/" . urlencode($filename);
         }
         
         $user->update();
