@@ -41,5 +41,5 @@ Route::middleware([
 ])->group(function () {
     Route::get('/u/{name}', [UserController::class,'show'])->name('user.profile');
     Route::get('/u/{name}/edit', [UserController::class,'edit'])->name('user.edit')->middleware(RedirectIfNotProfileUser::class);
-    Route::put('/u/{name}/update', [UserController::class,'update'])->name('user.update')->middleware(RedirectIfNotProfileUser::class);
+    Route::put('/u/{name}/update', [UserController::class,'update'])->name('user.update');
 });

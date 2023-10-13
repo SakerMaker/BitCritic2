@@ -52,16 +52,10 @@
                 <h5 class="pb-2 pb-md-0 mb-4 fw-bold border-bottom">{{$user->name}}</h5>
                 <div class="d-flex justify-content-between align-items-center align-self-center flex-wrap">
                   <div class="d-flex gap-1 flex-wrap">
-                    <p class="m-0"><i class="bi bi-geo-alt-fill"></i>
-                      {{ Form::text('location', $user->location, ['class' => 'form-control w-75 d-inline-block mx-3' . ($errors->has('location') ? ' is-invalid' : ''), 'placeholder' => 'Ubicación...']) }}
-                      {!! $errors->first('location', '<div class="invalid-feedback">:message</div>') !!}
-                    </p>
-                    <p class="m-0"><i class="bi bi-calendar-heart-fill"></i>
-                      {{ Form::date('birthday', $user->birthday, ['class' => 'form-control w-75 d-inline-block mx-3' . ($errors->has('birthday') ? ' is-invalid' : ''), 'placeholder' => 'Cumpleaños...']) }}
-                      {!! $errors->first('birthday', '<div class="invalid-feedback">:message</div>') !!}
-                    </p>
+                      @if(isset($user->location))<p><i class="bi bi-geo-alt-fill"></i> {{$user->location}}</p>@endif
+                      @if(isset($user->birthday))<p><i class="bi bi-calendar-heart-fill"></i> {{$user->birthday}}</p>@endif
                   </div>
-                  <div class="d-flex justify-content-lg-end justify-content-center text-center py-1 mt-4 mt-lg-0 flex-wrap user-counts" style="float:right;">
+                  <div class="d-flex @if (isset($user->location)||isset($user->birthday)) justify-content-lg-end @else m-auto @endif justify-content-center text-center py-1 mt-lg-0 flex-wrap user-counts" style="float:right;">
                     <div>
                       <p class="mb-1 h5">{{$reviews}}</p>
                       <p class="small text-muted mb-0">Reviews</p>
