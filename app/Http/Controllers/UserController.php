@@ -22,6 +22,10 @@ class UserController extends Controller
             $user->birthday=date('d M. Y',$birthday);
         }
 
+        if (NULL === $user->about_me) {
+            $user->about_me="Este usuario aún no ha escrito nada...";
+        }
+
         $followers=CountProfile::follow_count($user);
         $likes=CountProfile::likes_count($user);
         $comments=CountProfile::comments_count($user);
