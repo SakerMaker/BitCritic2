@@ -39,4 +39,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/u/{name}', [UserController::class,'show'])->name('user.profile');
+    Route::get('/u/{name}/edit', [UserController::class,'edit'])->name('user.edit');
+    Route::put('/u/{name}/update', [UserController::class,'update'])->name('user.update');
 });

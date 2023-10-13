@@ -23,11 +23,19 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+
+
+    static $rules = [
+        'location' => 'max:16',
+        'about_me' => 'max:16383',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+    
     protected $fillable = [
         'name', 'email', 'password',
     ];

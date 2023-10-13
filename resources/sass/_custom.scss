@@ -106,3 +106,36 @@
 .main-content-view {
     min-height:75vh;
 }
+
+@media (max-width:287px) {
+    .order-pfp {
+        background-color: alpha($color: #000000);
+        order:2;
+        margin:10px auto 0 auto!important;
+        .profile-pic {
+            margin-top:0!important;
+        }
+    }
+    .order-banner {
+        order:1;
+        overflow: unset!important;
+    }
+    #output2 {
+        display:flex;
+        flex-direction: column!important;
+        flex-wrap: nowrap!important;
+    }
+    .user-counts {
+        div {
+            width:auto!important;
+        }
+    }
+}
+
+@media (max-width:415px) {
+    .user-counts {
+        div {
+            width:50%;
+        }
+    }
+}
