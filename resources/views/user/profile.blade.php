@@ -29,7 +29,7 @@
                       Editar Perfil
                   </a>
                   @endif
-                  <div class="d-flex justify-content-end text-center py-1 mt-lg-0 mt-4 d-none d-md-flex" style="float:right;">
+                  <div class="d-flex justify-content-end text-center py-1 mt-lg-0 mt-4 d-none d-md-flex ms-auto" style="float:right;">
                   <div>
                     <p class="mb-1 h5">{{$reviews}}</p>
                     <p class="small text-muted mb-0">Reviews</p>

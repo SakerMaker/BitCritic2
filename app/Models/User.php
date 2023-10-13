@@ -28,6 +28,8 @@ class User extends Authenticatable implements MustVerifyEmail
     static $rules = [
         'location' => 'max:16',
         'about_me' => 'max:16383',
+        'profile_picture_path' => 'mimes:jpeg,jpg,png',
+        'banner_picture_path' => 'mimes:jpeg,jpg,png',
     ];
 
     /**
