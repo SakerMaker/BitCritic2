@@ -26,8 +26,8 @@
                 @else
                 <li class="nav-item">
                     <div class="btn-group d-sm-flex flex-column align-items-sm-center">
-                        <button class="btn border border-2 border-primary rounded-circle nav-link--profile-picture dropdown-toggle p-0 ms-sm-0 ms-md-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="rounded-circle object-cover p-0" src="@if (str_contains(Auth::user()->profile_photo_path, 'Profile-Picture-Default')){{ url(Auth::user()->profile_photo_path) }}@else{{ url("/storage/".Auth::user()->profile_photo_path ) }}@endif" alt="{{ Auth::user()->name }}" />
+                        <button class="btn border border-2 border-primary rounded-circle nav-link--profile-picture dropdown-toggle p-0 ms-sm-0 ms-md-2 object-fit-cover" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:50px!important;height:50px!important;">
+                            <img class="rounded-circle object-fit-cover p-0" style="" src="@if (str_contains(Auth::user()->profile_photo_path, 'Profile-Picture-Default')){{ url(Auth::user()->profile_photo_path) }}@else{{ url("/storage/".Auth::user()->profile_photo_path ) }}@endif" alt="{{ Auth::user()->name }}" />
                         </button>
                         <div class="dropdown-menu dropdown-menu-end animate slideIn">
                             <!-- Account Management -->

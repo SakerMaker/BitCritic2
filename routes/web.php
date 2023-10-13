@@ -4,6 +4,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Web\ReviewController;
+use App\Http\Middleware\RedirectIfNotProfileUser;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/u/{name}', [UserController::class,'show'])->name('user.profile');
-    Route::get('/u/{name}/edit', [UserController::class,'edit'])->name('user.edit');
+    Route::get('/u/{name}/edit', [UserController::class,'edit'])->name('user.edit')->middleware(RedirectIfNotProfileUser::class);
     Route::put('/u/{name}/update', [UserController::class,'update'])->name('user.update');
 });
