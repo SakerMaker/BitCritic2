@@ -14,7 +14,7 @@
                     <a class="nav-link {{ ($current_page=="index" ? 'nav-link--active' : '') }}" href="{{ Route('index') }}">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ (str_starts_with($current_page,"games") ? 'nav-link--active' : '') }}" href="{{ Route('games') }}">Juegos</a>
+                    <a class="nav-link {{ (str_starts_with($current_page,"games") ? 'nav-link--active' : '') }}" href="{{ Route('games.index') }}">Juegos</a>
                 </li>
                 @guest
                 <li class="nav-item">
@@ -37,6 +37,9 @@
     
                             <x-dropdown-link href="{{ route('user.profile',Auth::user()->name) }}">
                                 <span class="span-text">{{ __('Mi Perfil') }}</span>
+                            </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('profile.show') }}">
+                                <span class="span-text">{{ __('Configuración') }}</span>
                             </x-dropdown-link>
     
                             <!-- Authentication -->

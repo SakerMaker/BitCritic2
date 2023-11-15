@@ -3,7 +3,7 @@
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Web\ReviewController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Middleware\RedirectIfNotProfileUser;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +27,11 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 
 //Reviews
 // Route::get('/reviews/1', [ReviewController::class, 'index']); //Certain review
+Route::post("/review/store", [ReviewController::class,'store'])->name('reviews.store');
 
 //Games
-Route::get('/games', [GameController::class, 'index'])->name("games"); //List of games
+Route::get('/games', [GameController::class, 'index'])->name("games.index"); //List of games
+Route::get('/games/{id}', [GameController::class, 'show'])->name("games.show"); //List of games
 
 //Users
 // Route::get('/user/1'); //Certain user

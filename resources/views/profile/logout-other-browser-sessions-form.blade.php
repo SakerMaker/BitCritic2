@@ -83,11 +83,11 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
+                <x-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled" class="btn-dark">
                     {{ __('Cancel') }}
-                </x-secondary-button>
+                </x-button>
 
-                <x-button class="ml-3"
+                <x-button class="btn-danger"
                             wire:click="logoutOtherBrowserSessions"
                             wire:loading.attr="disabled">
                     {{ __('Log Out Other Browser Sessions') }}
