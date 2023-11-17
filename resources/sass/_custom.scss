@@ -182,3 +182,38 @@
     width:50px;
 }
 
+.card-game {
+    flex: 373.33px 0 1;
+    overflow: hidden;
+}
+.card-game-parent-div {
+    height:100%;
+    max-width:100%;
+}
+.card-game-child-div {
+    position:relative;
+    overflow:hidden;
+    background-color:rgba(0,0,0,0.55);
+    backdrop-filter: blur(3px);
+    height:100%;
+}
+.card-game-image {
+    max-width:100%;
+}
+@media (max-width:1400px) {
+    .card-game {
+        flex: 313.33px 0 0;
+        overflow: hidden;
+    }
+}
+@media (max-width:1200px) {
+    .card-game {
+        flex: 246.33px 0 0;
+        overflow: hidden;
+    }
+}
+@media (max-width:990px) {
+    .card-game {
+        flex: 205.33px 0 0;
+    }
+}

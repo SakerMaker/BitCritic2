@@ -3,7 +3,7 @@
 @endsection
 
 <x-app-layout>
-<header class="bg-dark py-5">
+<header class="bg-dark pb-5">
     <div class="container px-5">
       <div class="row gx-5 align-items-center justify-content-center">
         <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -25,7 +25,8 @@
       <div class="row gx-5 justify-content-center">
         <div class="col-lg-8 col-xl-6">
           <div class="text-center text-dark">
-            <h2 class="fw-bolder mb-3">Juegos Más Valorados</h2>
+            <h2 class="fw-bolder mb-3" id="buscar">Buscar</h2>
+            
           </div>
         </div>
       </div>
@@ -46,7 +47,7 @@
               </form> --}}
         </div>
         
-        <livewire:show-games :page=0 :canSearch="true" perPage=12 columns=4/>
+        <livewire:show-games :page=0 :canSearch="true" perPage=420 columns=4/>
       <div>
       
       

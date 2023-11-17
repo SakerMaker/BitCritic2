@@ -91,8 +91,9 @@
           </div>
         </div>
       </div>
-      <div class="row gx-5">
-        <livewire:show-games :page=0 :canSearch="false" columns=3 />
+      <div class="row justify-content-center mx-auto">
+      @livewire('show-games', ['page' => 0, "canSearch" => false, "columns" => 3, "canLoadButton" => false])
+        <a class="fw-bold btn btn-primary col-2 mx-auto" href="{{route("games.index")}}">Ver más...</a>
     </div>
     
   </section>

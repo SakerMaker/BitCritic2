@@ -10,21 +10,21 @@
 
         <div class="collapse navbar-collapse p-4 rounded-3" id="navbar--links">
             <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item">
+                <li class="nav-item ms-lg-4 ms-0">
                     <a class="nav-link {{ ($current_page=="index" ? 'nav-link--active' : '') }}" href="{{ Route('index') }}">Inicio</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item ms-lg-4 ms-0">
                     <a class="nav-link {{ (str_starts_with($current_page,"games") ? 'nav-link--active' : '') }}" href="{{ Route('games.index') }}">Juegos</a>
                 </li>
                 @guest
-                <li class="nav-item">
+                <li class="nav-item ms-lg-4 ms-0">
                     <a class="nav-link {{ $current_page=="login" ? 'nav-link--active' : '' }}" href="{{ Route('login') }}">Iniciar Sesión</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item ms-lg-4 ms-0">
                     <a class="nav-link {{ $current_page=="register" ? 'nav-link--active' : '' }}" href="{{ Route('register') }}">Registrarse</a>
                 </li>
                 @else
-                <li class="nav-item">
+                <li class="nav-item ms-lg-4 ms-0">
                     <div class="btn-group d-sm-flex flex-column align-items-center">
                         <button class="btn border border-2 border-primary rounded-circle nav-link--profile-picture dropdown-toggle p-0 ms-sm-0 object-fit-cover" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:50px!important;height:50px!important;">
                             <img class="rounded-circle object-fit-cover p-0" style="" src="@if (str_contains(Auth::user()->profile_photo_path, 'Profile-Picture-Default')){{ url(Auth::user()->profile_photo_path) }}@else{{ url("/storage/".Auth::user()->profile_photo_path ) }}@endif" alt="{{ Auth::user()->name }}" />

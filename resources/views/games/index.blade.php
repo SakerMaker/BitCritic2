@@ -3,11 +3,11 @@
 @endsection
 
 <x-app-layout>
-    <section class="py-5">
+    <section>
         <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center text-white">
-                <div class="col-md-6 col-lg-4 d-flex justify-content-end"><img class="card-img-top mb-5 mb-md-0 rounded-3" src="{{ url($game['cover_url'] )}}" alt="..." /></div>
-                <div class="col-md-6 col-lg-8">
+            <div class="row gx-4  gx-lg-5 align-items-start text-white">
+                <div class="col-md-4 col-lg-4 d-flex justify-content-end"><img class="card-img-top mb-5 mb-md-0 rounded-3" src="{{ url($game['cover_url'] )}}" alt="..." /></div>
+                <div class="col-md-8 col-lg-8">
                     @if (isset($game["genres"]))
                     @foreach ($game["genres"] as $genre)
                         <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{$genre}}</div>
@@ -17,11 +17,13 @@
                     <div class="fs-5 mb-4">
                         <span>&middot; {{$review_count}} reviews</span>
                     </div>
-                        <p class="lead" id="summary">
+                    <p>
+                        <p class="lead d-lg-block d-sm-block d-md-none" id="summary">
+                            @if (isset($game["summary"]))
                             {{$game["summary"]}}
                         </p>
                         @if (strlen($game["summary"])>500)
-                            <a class="link-light" id="showSummary" href="#" onclick="toggleSummary()">Leer más...</a>
+                            <a class="link-light d-lg-block d-sm-block d-md-none" id="showSummary" href="#" onclick="toggleSummary()">Leer más...</a>
                             <script>
                                 let summary = false;
                                 let text = document.getElementById("summary").innerHTML;
@@ -47,12 +49,22 @@
                         @endif
                     
                     </p>
+                    @endif
                     <div class="d-flex">
                         <a class="btn btn-outline-light flex-shrink-0" type="button" href="#reviews">
                             <i class="bi bi-star me-1"></i>
                             Poner Review
                         </a>
                     </div>
+                </div>
+                <div class="mt-4">
+                    <p>
+                        <p class="lead d-none d-md-block d-lg-none" id="summary_tablet">
+                            @if (isset($game["summary"]))
+                            {{$game["summary"]}}
+                            @endif
+                        </p>
+                    </p>
                 </div>
             </div>
             <section id="reviews">
@@ -86,7 +98,7 @@
                         
                         <div class="d-flex mb-4">
                             <!-- Parent comment-->
-                            <a href={{url("/perfil/".$single_review[0]->id)}}><div class="flex-shrink-0"><img class="rounded-circle" src="@if (str_contains(Auth::user()->profile_photo_path, 'Profile-Picture-Default')){{ url(Auth::user()->profile_photo_path) }}@else{{ url("/storage/".Auth::user()->profile_photo_path ) }}@endif" alt="..." style="width:50px;height:50px;object-fit:cover;"/></div></a>
+                            <a href={{url("/u/".$single_review[0]->name)}}><div class="flex-shrink-0"><img class="rounded-circle" src="@if (str_contains($single_review[0]->profile_photo_path, 'Profile-Picture-Default')){{url($single_review[0]->profile_photo_path)}}@else{{url("storage/".$single_review[0]->profile_photo_path)}}@endif" alt="..." style="width:50px;height:50px;object-fit:cover;"/></div></a>
                             <div class="ms-3">
                             
                                 <div class="fw-bold"><span class="fw-bolder">{{$single_review[0]->review_title}}</span> &middot; by <a href={{url("/u/".$single_review[0]->name)}}>{{$single_review[0]->name}}</a> &middot; {{substr($single_review[0]->created_at,0,10)}}</div>
@@ -101,6 +113,9 @@
                             </div>
                         </div>
                       @endforeach
+                      @if ($reviews == NULL)
+                        <p>Vaya... parece que aún no hay reviews para este juego. ¡Sé el primero en redactar una!
+                      @endif
                       
                   </div>
               </div>

@@ -27,6 +27,7 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 
 //Reviews
 // Route::get('/reviews/1', [ReviewController::class, 'index']); //Certain review
+Route::get('/reviews/{review}', [ReviewController::class,'show'])->name('reviews.show');
 Route::post("/review/store", [ReviewController::class,'store'])->name('reviews.store');
 
 //Games

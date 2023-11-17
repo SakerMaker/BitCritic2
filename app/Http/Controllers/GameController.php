@@ -23,8 +23,12 @@ class GameController extends Controller
     {
         $igdb = new IGDB("games");
         $game = $igdb->find($id);
-        $cover = Cover::find($game["cover"]);
-        $game["cover_url"] = $cover->getUrl(Size::COVER_BIG, true);
+        if (isset($game["cover"])) {
+            $cover = Cover::find($game["cover"]);
+            $game["cover_url"] = $cover->getUrl(Size::COVER_BIG, true);
+        } else {
+            $game["cover_url"] = "img/BitCritic-No-Game-Cover-View-Game-Review-Community-S.png";
+        }
         if (isset($game["genres"])) {
             for ($i = 0;$i<count($game["genres"]);$i++) {
                 $genres[$i]=Genre::select(["name"])->find($game["genres"][$i]);
