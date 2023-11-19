@@ -77,13 +77,25 @@ class UserController extends Controller
             }
         }
         
-        $allreviews = array_reverse($allreviews->toArray());
+        $allreviews = $allreviews->toArray();
+
+        $temp = array_column($allreviews, "id_game");
+        array_multisort($temp, SORT_ASC, $allreviews);
         
+        $contador=0;
+        foreach ($allreviews as $review) {
+            $allreviews[$contador]["games"]=$games[$contador];
+            $contador++;
+        }
+
+        $temp = array_column($allreviews, "updated_at");
+        array_multisort($temp, SORT_DESC, $allreviews);
+
         // $followers=CountProfile::follow_count($user);
         $likes=CountProfile::likes_count($user);
         $comments=CountProfile::comments_count($user);
         $reviews=CountProfile::reviews_count($user);
-        return view('user.profile', compact('user', "likes", "comments", "reviews", "allreviews", "games"));
+        return view('user.profile', compact('user', "likes", "comments", "reviews", "allreviews"));
     }
 
     public function edit($name) {

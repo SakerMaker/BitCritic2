@@ -19,38 +19,43 @@ class Feed extends Component
     public $skip;
     public $perPage;
     public $canLoadMore;
+    public $globalReviews;
 
-    public function mount($user=0, $perPage=12, $canLoadMore = true) {
+    public function mount($user=0, $perPage=12, $canLoadMore = true, $globalReviews = []) {
         $this->following=User::find($user)->followings;
         $this->perPage = $perPage;
         $this->canLoadMore = $canLoadMore;
+        $this->globalReviews = $globalReviews;
     }
 
     public function nextPage() {
         $this->page = $this->page+1;
+        
     }
 
     public function render()
     {
         $this->canLoadMore=true;
         if (!empty($this->following[0])) {
+            
             $igdb = new IGDB("games");
             $users_id=[];
             $users=[];
             foreach ($this->following as $following) {
                 $users_id[]=$following->id;
             }
-            $allreviews=Review::whereIn("id_user",$users_id)->take((int)$this->perPage)->skip((int)$this->perPage*$this->page)->get();
+            $allreviews=Review::whereIn("id_user",$users_id)->orderByDesc("updated_at")->take((int)$this->perPage)->skip((int)$this->perPage*(int)$this->page)->get();
+            
             $games=[];
             if (!empty($allreviews->toArray())) {
                 
                 $games_id=[];
                 foreach ($allreviews as $review) {
                     $games_id[]=$review->id_game;
-                    $users[]=User::find($following->id);
+                    $users[]=User::find($review->id_user)->toArray();
                 }
-                $games=$igdb->whereIn("id",$games_id)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * $this->page)->get();
-    
+                $games=$igdb->whereIn("id",$games_id)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(count($allreviews))->get();
+                
                 $covers["cover"]=[];
                 if ($games!=NULL) {
                     $contador=0;
@@ -74,7 +79,7 @@ class Feed extends Component
                         $contador++;
                     }
                 }
-                $allCovers = Cover::whereIn("game", $covers["cover"])->take(count($covers["cover"]))->get();
+                $allCovers = Cover::whereIn("game", $covers["cover"])->take(count($allreviews))->get();
                 
                 foreach ($allCovers as $cover) {
                     $contador=0;
@@ -93,7 +98,37 @@ class Feed extends Component
         }
 
 
-        $allreviews = array_reverse($allreviews->toArray());
-        return view('livewire.feed')->with("allreviews",$allreviews)->with("games",$games)->with("users",$users);
+        $allreviews = $allreviews->toArray();
+
+        $temp = array_column($allreviews, "id_game");
+        array_multisort($temp, SORT_ASC, $allreviews);
+        
+        $contador=0;
+        foreach ($allreviews as $review) {
+            $allreviews[$contador]["games"]=$games[$contador];
+            $contador++;
+        }
+
+        $temp = array_column($allreviews, "id_user");
+        array_multisort($temp, SORT_ASC, $allreviews);
+        
+        
+        
+        $temp = array_column($users, "id");
+        array_multisort($temp, SORT_ASC, $users);
+
+        $contador=0;
+        foreach ($allreviews as $review) {
+            $allreviews[$contador]["user"]=$users[$contador];
+            $contador++;
+        }
+
+        $temp = array_column($allreviews, "updated_at");
+        array_multisort($temp, SORT_DESC, $allreviews);
+        
+
+        $this->globalReviews[]=$allreviews;
+
+        return view('livewire.feed')->with("allreviews",$this->globalReviews);
     }
 }
