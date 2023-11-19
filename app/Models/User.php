@@ -13,8 +13,12 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Hypefactors\Laravel\Follow\Traits\CanFollow;
+use Hypefactors\Laravel\Follow\Contracts\CanFollowContract;
+use Hypefactors\Laravel\Follow\Traits\CanBeFollowed;
+use Hypefactors\Laravel\Follow\Contracts\CanBeFollowedContract;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail,CanBeFollowedContract,CanFollowContract
 {
     use HasApiTokens;
     use HasFactory;
@@ -22,14 +26,14 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasRoles;
     use Notifiable;
     use TwoFactorAuthenticatable;
-
-
+    use CanFollow;
+    use CanBeFollowed;
 
     static $rules = [
         'location' => 'max:16',
         'about_me' => 'max:16383',
-        'profile_photo_path' => 'file|mimes:jpg,jpeg,png|max:1024',
-        'banner_photo_path' => 'file|mimes:jpg,jpeg,png|max:1024',
+        'profile_photo_path' => 'file|mimes:jpg,jpeg,png|max:4096',
+        'banner_photo_path' => 'file|mimes:jpg,jpeg,png|max:16384',
     ];
 
     /**

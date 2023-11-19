@@ -48,7 +48,16 @@ class ShowGames extends Component
         if (isset($this->search) && $this->search!=null) {
             $this->allGames=[];
             // $this->canLoadMore=false;
-            $games = $igdb->fuzzySearch(["name"], $this->search, false)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            $games = $igdb->search($this->search)->whereNotNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(4)->get();
+            $gamesIds=[];
+            foreach ($games as $game) {
+                $gamesIds[]=$game["id"];
+            }
+            if (!empty($gamesIds)) {
+                $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNotIn("id",$gamesIds)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            } else {
+                $games = $igdb->fuzzySearch(["name"], $this->search, false)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            }
             $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
         } else {
             $games = $igdb->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();

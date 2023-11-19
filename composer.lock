@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "129385014d75cb007baee4450cdc3865",
+    "content-hash": "b857408610524930a864f1fd606fb9bb",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1073,6 +1073,73 @@
                 }
             ],
             "time": "2023-08-27T10:19:19+00:00"
+        },
+        {
+            "name": "hypefactors/laravel-follow",
+            "version": "v9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hypefactors/laravel-follow.git",
+                "reference": "81be0e8ba09f89aec57cf77558ed1a644f6edf05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hypefactors/laravel-follow/zipball/81be0e8ba09f89aec57cf77558ed1a644f6edf05",
+                "reference": "81be0e8ba09f89aec57cf77558ed1a644f6edf05",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^10.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.4",
+                "hypefactors/php-code-standards": "^3.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "branch-alias": {
+                    "dev-master": "9.0.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Hypefactors\\Laravel\\Follow\\FollowServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hypefactors\\Laravel\\Follow\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Hypefactors A/S",
+                    "email": "support@hypefactors.com",
+                    "homepage": "https://hypefactors.com"
+                }
+            ],
+            "description": "Laravel 9 Follow System for Eloquent models.",
+            "homepage": "https://hypefactors.com",
+            "keywords": [
+                "Follow",
+                "hypefactors",
+                "laravel",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/hypefactors/laravel-follow/issues",
+                "source": "https://github.com/hypefactors/laravel-follow/tree/v9.0.0"
+            },
+            "time": "2023-07-22T09:44:07+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",

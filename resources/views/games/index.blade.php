@@ -95,23 +95,27 @@
                     <h1 class="text-dark mt-5 mb-4 fw-bold">Reviews</h1>
                       <!-- Comment with nested comments-->
                       @foreach ($reviews as $single_review)
-                        
-                        <div class="d-flex mb-4">
-                            <!-- Parent comment-->
-                            <a href={{url("/u/".$single_review[0]->name)}}><div class="flex-shrink-0"><img class="rounded-circle" src="@if (str_contains($single_review[0]->profile_photo_path, 'Profile-Picture-Default')){{url($single_review[0]->profile_photo_path)}}@else{{url("storage/".$single_review[0]->profile_photo_path)}}@endif" alt="..." style="width:50px;height:50px;object-fit:cover;"/></div></a>
-                            <div class="ms-3">
-                            
-                                <div class="fw-bold"><span class="fw-bolder">{{$single_review[0]->review_title}}</span> &middot; by <a href={{url("/u/".$single_review[0]->name)}}>{{$single_review[0]->name}}</a> &middot; {{substr($single_review[0]->created_at,0,10)}}</div>
-                                @if (strlen($single_review[0]->review_content)>100)
-                                    {{substr($single_review[0]->review_content,0,100)}}...
-                                @else
-                                    {{substr($single_review[0]->review_content,0,100)}}
-                                @endif
-                                <br>
-                                <a class="text-secondary" href="{{url("/reviews/".$single_review[0]->id_review)}}">Ver review</a>
-                            
+                        <a href="{{url("/reviews/".$single_review[0]->id_review)}}">
+                            <div class="d-flex mb-4 p-4 border rounded align-items-center flex-wrap">
+                                <!-- Parent comment-->
+                                <a href={{url("/u/".$single_review[0]->name)}}><div class="flex-shrink-0"><img class="rounded-circle" src="@if (str_contains($single_review[0]->profile_photo_path, 'Profile-Picture-Default')){{url($single_review[0]->profile_photo_path)}}@else{{url("storage/".$single_review[0]->profile_photo_path)}}@endif" alt="..." style="width:50px;height:50px;object-fit:cover;"/></div></a>
+                                <div class="ms-lg-3">
+                                
+                                    <div class="fw-bold d-none d-md-block"><span class="fw-bolder">{{$single_review[0]->review_title}}</span> &middot; by <a href={{url("/u/".$single_review[0]->name)}}>{{$single_review[0]->name}}</a> &middot; <span class="small text-secondary">{{substr($single_review[0]->created_at,0,10)}}</span></div>
+                                    <div class="fw-bold d-block d-md-none"><span class="fw-bolder">{{$single_review[0]->review_title}}</span> <br/> by <a href={{url("/u/".$single_review[0]->name)}}>{{$single_review[0]->name}}</a><br/><span class="small text-secondary">{{substr($single_review[0]->created_at,0,10)}}</span></div>
+                                    @if (strlen($single_review[0]->review_content)>100)
+                                        {{substr($single_review[0]->review_content,0,100)}}...
+                                    @else
+                                        {{substr($single_review[0]->review_content,0,100)}}
+                                    @endif
+                                    <br>
+                                
+                                </div>
+                                <div class="ms-auto">
+                                    <a class="btn btn-primary" href="{{url("/reviews/".$single_review[0]->id_review)}}">Ver Review</a>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                       @endforeach
                       @if ($reviews == NULL)
                         <p>Vaya... parece que aún no hay reviews para este juego. ¡Sé el primero en redactar una!

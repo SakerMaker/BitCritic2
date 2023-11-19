@@ -62,17 +62,14 @@
                       <p class="mb-1 h5">{{$likes}}</p>
                       <p class="small text-muted mb-0">Likes</p>
                     </div>
-                    <div class="px-3">
-                      <p class="mb-1 h5">{{$followers}}</p>
-                      <p class="small text-muted mb-0">Seguidores</p>
-                    </div>
+                    @livewire('followers-count', ['user' => $user->id])
                   </div>
                 </div>
             </div>
             <div class="card-body ps-4 pe-4 pt-0 mt-3 text-black">
               <div class="mb-5">
                 <p class="lead fw-normal mb-1">Sobre Mí</p>
-                {{ Form::textarea('about_me', $user->about_you, ['class' => 'form-control' . ($errors->has('about_me') ? ' is-invalid' : ''), 'placeholder' => 'Escribe sobre ti...']) }}
+                {{ Form::textarea('about_me', $user->about_me, ['class' => 'form-control' . ($errors->has('about_me') ? ' is-invalid' : ''), 'placeholder' => 'Escribe sobre ti...']) }}
                 {!! $errors->first('about_me', '<div class="invalid-feedback">:message</div>') !!}
               </div>
               <div class="p-4 text-black">

@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use App\Models\User;
-use App\Models\Follows;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Traits\CountProfile;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use MarcReichel\IGDBLaravel\Builder as IGDB;
+use MarcReichel\IGDBLaravel\Models\Genre;
+use App\Traits\CountGame;
+use MarcReichel\IGDBLaravel\Enums\Image\Size;
+use MarcReichel\IGDBLaravel\Models\Cover;
 
 class UserController extends Controller
 {
+    
     use CountProfile;
 
     public function show($name) {
+        $igdb = new IGDB("games");
         $user=User::where('name', $name)->firstOrFail();
 
         if (isset($user->birthday) && NULL !== $user->birthday) {
@@ -26,20 +31,67 @@ class UserController extends Controller
             $user->about_me="Este usuario aún no ha escrito nada...";
         }
 
-        $followers=CountProfile::follow_count($user);
+        $allreviews=Review::all()->where("id_user","=",$user->id);
+        $games=[];
+        if (!empty($allreviews->toArray())) {
+
+            $games_id=[];
+            foreach ($allreviews as $review) {
+                $games_id[]=$review->id_game;
+            }
+            $games=$igdb->whereIn("id",$games_id)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(count($games_id))->get();
+
+
+            if ($games!=NULL) {
+                $contador=0;
+                foreach ($games as $game) {
+                    if (isset($game["genres"])) {
+                        for ($i = 0;$i<count($game["genres"]);$i++) {
+                            $genres[$i]=Genre::select(["name"])->find($game["genres"][$i]);
+                            $genres[$i]=$genres[$i]->name;
+                        }
+                        $games[$contador]["genres"]=array_unique($genres);
+                    }
+                    $games[$contador]["reviews"]=CountGame::reviews_count($game["id"]);
+                    if (isset($game["cover"])) {
+                        $covers["cover"][]=$game["id"];
+                        $games[$contador]["hasCover"]=true;
+                    } else {
+                        $covers["cover"][]=0;
+                        $games[$contador]["cover"]="img/BitCritic-No-Game-Cover-View-Game-Review-Community-S.png";
+                        $games[$contador]["hasCover"]=false;
+                    }
+                    $contador++;
+                }
+            }
+            $allCovers = Cover::whereIn("game", $covers["cover"])->take(count($covers["cover"]))->get();
+            
+            foreach ($allCovers as $cover) {
+                $contador=0;
+                foreach ($games as $game) {
+                    if ($game["hasCover"] && $game["id"] == $cover["game"]) {
+                        $games[$contador]["cover"]=$cover->getUrl(Size::COVER_BIG, true);
+                    }
+                    $contador++;
+                }
+            }
+        }
+        
+        $allreviews = array_reverse($allreviews->toArray());
+        
+        // $followers=CountProfile::follow_count($user);
         $likes=CountProfile::likes_count($user);
         $comments=CountProfile::comments_count($user);
         $reviews=CountProfile::reviews_count($user);
-        return view('user.profile', compact('user', "followers", "likes", "comments", "reviews"));
+        return view('user.profile', compact('user', "likes", "comments", "reviews", "allreviews", "games"));
     }
 
     public function edit($name) {
         $user=User::where('name', $name)->firstOrFail();
-        $followers=CountProfile::follow_count($user);
         $likes=CountProfile::likes_count($user);
         $comments=CountProfile::comments_count($user);
         $reviews=CountProfile::reviews_count($user);
-        return view('user.edit', compact('user', "followers", "likes", "comments", "reviews"));
+        return view('user.edit', compact('user', "likes", "comments", "reviews"));
     }
 
     public function update(Request $request, $id)
@@ -72,5 +124,4 @@ class UserController extends Controller
         return redirect()->route('user.profile',Auth::user()->name);
         
     }
-    
 }

@@ -69,8 +69,8 @@ class ReviewController extends Controller
      */
     public function show(string $id)
     {
-        $review=Review::find($id);
-        $user = User::find($review->id_user);
+        $review=Review::findOrFail($id);
+        $user = User::findOrFail($review->id_user);
         $comments=Comment::all()->where("id_review","=",$id);
         $users=array();
         foreach ($comments as $single_comment) {

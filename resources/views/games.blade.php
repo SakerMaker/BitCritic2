@@ -31,7 +31,7 @@
         </div>
       </div>
       
-      <div class="row gx-5">
+      <div>
         <div class="mt-1 mb-4">
               {{-- <form action="{{ route('games.search') }}" method="POST">
                 @csrf

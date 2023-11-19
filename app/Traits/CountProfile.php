@@ -15,11 +15,11 @@ trait CountProfile {
      * @param Request $request
      * @return $this|false|string
      */
-    public static function follow_count(User $user) {
-        $followers=Follows::where("id_user_followed",$user->id)->get()->count();
+    // public static function follow_count(User $user) {
+    //     $followers=Follows::where("id_user_followed",$user->id)->get()->count();
 
-        return $followers;
-    }
+    //     return $followers;
+    // }
     public static function likes_count(User $user) {
         $likes=Like::where("id_user",$user->id)->get()->count();
 
