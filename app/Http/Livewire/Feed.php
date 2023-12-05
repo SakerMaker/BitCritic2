@@ -9,6 +9,7 @@ use MarcReichel\IGDBLaravel\Builder as IGDB;
 use MarcReichel\IGDBLaravel\Models\Cover;
 use MarcReichel\IGDBLaravel\Models\Genre;
 use App\Traits\CountGame;
+use Illuminate\Support\Facades\Auth;
 use MarcReichel\IGDBLaravel\Enums\Image\Size;
 
 class Feed extends Component
@@ -21,8 +22,8 @@ class Feed extends Component
     public $canLoadMore;
     public $globalReviews;
 
-    public function mount($user=0, $perPage=12, $canLoadMore = true, $globalReviews = []) {
-        $this->following=User::find($user)->followings;
+    public function mount($perPage=12, $canLoadMore = true, $globalReviews = []) {
+        $this->following=Auth::user()->followings;
         $this->perPage = $perPage;
         $this->canLoadMore = $canLoadMore;
         $this->globalReviews = $globalReviews;
@@ -35,20 +36,27 @@ class Feed extends Component
 
     public function render()
     {
-        $this->canLoadMore=true;
+        $this->canLoadMore=false;
         if (!empty($this->following[0])) {
+            $this->canLoadMore=true;
             
             $igdb = new IGDB("games");
             $users_id=[];
             $users=[];
             foreach ($this->following as $following) {
-                $users_id[]=$following->id;
+                $users_id[]=$following->followable_id;
             }
             $allreviews=Review::whereIn("id_user",$users_id)->orderByDesc("updated_at")->take((int)$this->perPage)->skip((int)$this->perPage*(int)$this->page)->get();
             
+
             $games=[];
             if (!empty($allreviews->toArray())) {
                 
+                $likes_id=[];
+                foreach ($allreviews as $review) {
+                    $likes_id[]=$review->totalLikes;
+                }
+
                 $games_id=[];
                 foreach ($allreviews as $review) {
                     $games_id[]=$review->id_game;
@@ -91,43 +99,50 @@ class Feed extends Component
                     }
                 }
             }
+            if (count($allreviews)<$this->perPage) {
+                $this->canLoadMore=false;
+            }
+    
+    
+            $allreviews = $allreviews->toArray();
+
+            $contador=0;
+            foreach ($allreviews as $review) {
+                $allreviews[$contador]["likes"]=Review::find($review["id"])->totalLikers;
+                $contador++;
+            }
+    
+            $temp = array_column($allreviews, "id_game");
+            array_multisort($temp, SORT_ASC, $allreviews);
+            
+            $contador=0;
+            foreach ($allreviews as $review) {
+                $allreviews[$contador]["games"]=$games[$contador];
+                $contador++;
+            }
+    
+            $temp = array_column($allreviews, "id_user");
+            array_multisort($temp, SORT_ASC, $allreviews);
+            
+            
+            
+            $temp = array_column($users, "id");
+            array_multisort($temp, SORT_ASC, $users);
+    
+            $contador=0;
+            foreach ($allreviews as $review) {
+                $allreviews[$contador]["user"]=$users[$contador];
+                $contador++;
+            }
+    
+            $temp = array_column($allreviews, "updated_at");
+            array_multisort($temp, SORT_DESC, $allreviews);
+            $this->globalReviews[]=$allreviews;
         }
-        
-        if (count($allreviews)<$this->perPage) {
-            $this->canLoadMore=false;
-        }
 
-
-        $allreviews = $allreviews->toArray();
-
-        $temp = array_column($allreviews, "id_game");
-        array_multisort($temp, SORT_ASC, $allreviews);
-        
-        $contador=0;
-        foreach ($allreviews as $review) {
-            $allreviews[$contador]["games"]=$games[$contador];
-            $contador++;
-        }
-
-        $temp = array_column($allreviews, "id_user");
-        array_multisort($temp, SORT_ASC, $allreviews);
         
         
-        
-        $temp = array_column($users, "id");
-        array_multisort($temp, SORT_ASC, $users);
 
-        $contador=0;
-        foreach ($allreviews as $review) {
-            $allreviews[$contador]["user"]=$users[$contador];
-            $contador++;
-        }
-
-        $temp = array_column($allreviews, "updated_at");
-        array_multisort($temp, SORT_DESC, $allreviews);
-        
-
-        $this->globalReviews[]=$allreviews;
 
         return view('livewire.feed')->with("allreviews",$this->globalReviews);
     }

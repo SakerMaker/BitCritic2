@@ -9,7 +9,6 @@
       <div class="card h-100 shadow border-0">
         <a href="{{url("/reviews")."/".$review["id"]}}" class="fill-div-link"></a>
         <div class="card-game">
-          
           <div style="background:url({{$review["games"]["cover"]}});background-size: cover;background-position: center center;background-repeat: no-repeat; " class="card-game-parent-div">            
             {{-- <div style="position:relative;overflow:hidden;padding-bottom:100%;"> --}}
             <div class="d-flex flex-wrap align-content-center card-game-child-div">
@@ -20,9 +19,12 @@
         </div>
           
         <div class="card-body p-4">
-          <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ isset($review["games"]["genres"]) ? $review["games"]["genres"][0] : "" }}</div>
+          <div class="d-flex flex-row align-content-center flex-wrap align-items-end justify-content-between">
+              <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{"@"}}{{Auth::user()->name}}</div>
+              <div>{{$review["likes"]}}<i class="ms-2 bi bi-hand-thumbs-up lead"></i></div>
+          </div>
           <a class="text-decoration-none link-dark stretched-link" href="{{url("/reviews")."/".$review["id"]}}">
-            <h5 class="card-title mb-3">{{$review["title"]}}</h5>
+            <h5 class="card-title mb-2">{{$review["title"]}}</h5>
           </a>
           <p class="card-text mb-0">
 
@@ -34,12 +36,12 @@
 
           </p>
         </div>
-        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+        <div class="card-footer p-4 mt-4 pt-0 bg-transparent border-top-0">
           <div class="d-flex align-items-end justify-content-between">
             <div class="d-flex align-items-center">
               <div class="small">
                 <div class="fw-bold"><span class="fw-bolder">Juego: </span>{{$review["games"]["name"]}}</div>
-                <div class="text-muted">{{substr($review["created_at"],0,10)}} &middot; by {{$user->name}}</div>
+                <div class="text-muted">{{substr($review["created_at"],0,10)}} &middot; {{ isset($review["games"]["genres"]) ? $review["games"]["genres"][0] : "" }}</div>
               </div>
             </div>
           </div>

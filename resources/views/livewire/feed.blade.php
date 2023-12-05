@@ -19,9 +19,9 @@
                       </div>
                         
                       <div class="card-body p-4">
-                        <div class="d-flex">
+                        <div class="d-flex flex-row align-content-center flex-wrap align-items-end justify-content-between">
                             <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{"@"}}{{$review["user"]["name"]}}</div>
-
+                            <div>{{$review["likes"]}}<i class="ms-2 bi bi-hand-thumbs-up lead"></i></div>
                         </div>
                         <a class="text-decoration-none link-dark stretched-link" href="{{url("/reviews")."/".$review["id"]}}">
                           <h5 class="card-title mb-2">{{$review["title"]}}</h5>
@@ -53,7 +53,10 @@
                   ?>
                   @endforeach
                   @endforeach
-    @if ($this->canLoadMore)
+        @if (empty($allreviews[0]))
+        <p>Vaya... parece que aún no sigues a nadie que haya escrito una review...
+      @endif
+      @if ($this->canLoadMore)
         @include("pn")
       @endif
 </div>

@@ -8,6 +8,7 @@ use MarcReichel\IGDBLaravel\Builder as IGDB;
 use App\Traits\CountGame;
 use MarcReichel\IGDBLaravel\Enums\Image\Size;
 use MarcReichel\IGDBLaravel\Models\Cover;
+use MarcReichel\IGDBLaravel\Models\Game;
 
 class ShowGames extends Component
 {
@@ -18,6 +19,7 @@ class ShowGames extends Component
     public $skip;
     public $perPage;
     public $search;
+    public $previousSearch;
     public $canSearch;
     public $allGames;
     public $columns;
@@ -43,23 +45,97 @@ class ShowGames extends Component
     public function render() {
         $igdb = new IGDB("games");
         $this->canLoadMore=true;
-        
+
         
         if (isset($this->search) && $this->search!=null) {
-            $this->allGames=[];
-            // $this->canLoadMore=false;
-            $games = $igdb->search($this->search)->whereNotNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(4)->get();
-            $gamesIds=[];
+            if ($this->previousSearch == NULL || $this->previousSearch != $this->search) {
+                $this->allGames=[];
+            }
+            $this->previousSearch = $this->search;
+            
+            // $games = $igdb->search($this->search)->whereNotNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(4)->get();
+            // $gamesIds=[];
+            // foreach ($games as $game) {
+            //     $gamesIds[]=$game["id"];
+            // }
+            // if (!empty($gamesIds)) {
+            //     $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNotIn("id",$gamesIds)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            // } else {
+            //     $games = $igdb->fuzzySearch(["name"], $this->search, false)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            // }
+            // $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            $games = $igdb->where("name",$this->search)->whereNotNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            $gamesIds=[0];
             foreach ($games as $game) {
                 $gamesIds[]=$game["id"];
             }
-            if (!empty($gamesIds)) {
-                $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNotIn("id",$gamesIds)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
-            } else {
-                $games = $igdb->fuzzySearch(["name"], $this->search, false)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            $perActualPage = $this->perPage;
+            $perActualPage=$perActualPage-count($gamesIds);
+            if ($perActualPage>0) {
+                $games += $igdb->whereLike("name",$this->search."%", false)->whereNotNull("total_rating_count")->whereNotIn("id",$gamesIds)->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+                $gamesIds=[0];
+                foreach ($games as $game) {
+                    $gamesIds[]=$game["id"];
+                }
             }
-            $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            $perActualPage=$this->perPage;
+            $perActualPage=$perActualPage-count($gamesIds);
+            if ($perActualPage>0) {
+                $games += $igdb->whereLike("name","%".$this->search."%", false)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->whereNotIn("id",$gamesIds)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+                $gamesIds=[0];
+                foreach ($games as $game) {
+                    $perActualPage--;
+                    $gamesIds[]=$game["id"];
+                }
+            }
+            $perActualPage = $this->perPage;
+            $perActualPage=$perActualPage-count($gamesIds);
+            if ($perActualPage>0) {
+                $games += $igdb->where("name",$this->search)->whereNull("total_rating_count")->whereNotIn("id",$gamesIds)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+                $gamesIds=[0];
+                foreach ($games as $game) {
+                    $gamesIds[]=$game["id"];
+                }
+            }
+            $perActualPage=$this->perPage;
+            $perActualPage=$perActualPage-count($gamesIds);
+            if ($perActualPage>0) {
+                $games += $igdb->whereLike("name",$this->search."%", false)->whereNull("total_rating_count")->whereNotIn("id",$gamesIds)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+                $gamesIds=[0];
+                foreach ($games as $game) {
+                    $perActualPage--;
+                    $gamesIds[]=$game["id"];
+                }
+            }
+            $perActualPage=$this->perPage;
+            $perActualPage=$perActualPage-count($gamesIds);
+            if ($perActualPage>0) {
+                $games += $igdb->whereLike("name","%".$this->search."%", false)->whereNull("total_rating_count")->whereNotIn("id",$gamesIds)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+                $gamesIds=[0];
+                foreach ($games as $game) {
+                    $perActualPage--;
+                    $gamesIds[]=$game["id"];
+                }
+            }
+            // $perActualPage=$this->perPage;
+            // $perActualPage=$perActualPage-count($gamesIds);
+            // if ($perActualPage>0) {
+            //     $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNotIn("id",$gamesIds)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            //     $gamesIds=[0];
+            //     foreach ($games as $game) {
+            //         $perActualPage--;
+            //         $gamesIds[]=$game["id"];
+            //     }
+            // }
+            // $perActualPage=$this->perPage;
+            // $perActualPage=$perActualPage-count($gamesIds);
+            // if ($perActualPage>0) {
+            //     $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
+            // }
         } else {
+            if ($this->previousSearch != null) {
+                $this->allGames=[];
+            }
             $games = $igdb->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
             $games += $igdb->whereNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
         }
@@ -109,6 +185,7 @@ class ShowGames extends Component
         
 
         $this->allGames[] = $games;
+        $this->allGames = array_unique($this->allGames, SORT_REGULAR);
         
         return view('livewire.show-games')->with('allGames', $this->allGames);
     }

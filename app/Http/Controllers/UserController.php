@@ -92,7 +92,7 @@ class UserController extends Controller
         array_multisort($temp, SORT_DESC, $allreviews);
 
         // $followers=CountProfile::follow_count($user);
-        $likes=CountProfile::likes_count($user);
+        $likes=$user->totalLikes;
         $comments=CountProfile::comments_count($user);
         $reviews=CountProfile::reviews_count($user);
         return view('user.profile', compact('user', "likes", "comments", "reviews", "allreviews"));
@@ -100,7 +100,7 @@ class UserController extends Controller
 
     public function edit($name) {
         $user=User::where('name', $name)->firstOrFail();
-        $likes=CountProfile::likes_count($user);
+        $likes=$user->totalLikes;
         $comments=CountProfile::comments_count($user);
         $reviews=CountProfile::reviews_count($user);
         return view('user.edit', compact('user', "likes", "comments", "reviews"));

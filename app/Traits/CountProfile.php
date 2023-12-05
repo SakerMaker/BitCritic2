@@ -20,11 +20,11 @@ trait CountProfile {
 
     //     return $followers;
     // }
-    public static function likes_count(User $user) {
-        $likes=Like::where("id_user",$user->id)->get()->count();
+    // public static function likes_count(User $user) {
+    //     $likes=Like::where("id_user",$user->id)->get()->count();
 
-        return $likes;
-    }
+    //     return $likes;
+    // }
     public static function comments_count(User $user) {
         $comments=Comment::where("id_user",$user->id)->get()->count();
 

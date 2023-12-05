@@ -29,7 +29,6 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 
 //Reviews
 // Route::get('/reviews/1', [ReviewController::class, 'index']); //Certain review
-Route::get('/reviews/{review}', [ReviewController::class,'show'])->name('reviews.show');
 
 //Games
 Route::get('/games', [GameController::class, 'index'])->name("games.index"); //List of games
@@ -44,7 +43,8 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-])->group(function () {
+    ])->group(function () {
+    Route::get('/reviews/{review}', [ReviewController::class,'show'])->name('reviews.show');
     Route::post("/review/store", [ReviewController::class,'store'])->name('reviews.store');
     Route::post('/comments/store', [CommentController::class,'store'])->name('comments.store');
     Route::delete('/comments/destroy/{comment}', [CommentController::class,'destroy'])->name('comments.destroy');

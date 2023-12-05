@@ -47,7 +47,7 @@
                   </form> --}}
             </div>
             
-            @livewire('feed', ['user' => Auth::id(), 'page' => 0])
+            @livewire('feed', ['page' => 0])
           <div>
           
           

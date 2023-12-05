@@ -17,6 +17,7 @@ use Hypefactors\Laravel\Follow\Traits\CanFollow;
 use Hypefactors\Laravel\Follow\Contracts\CanFollowContract;
 use Hypefactors\Laravel\Follow\Traits\CanBeFollowed;
 use Hypefactors\Laravel\Follow\Contracts\CanBeFollowedContract;
+use Overtrue\LaravelLike\Traits\Liker;
 
 class User extends Authenticatable implements MustVerifyEmail,CanBeFollowedContract,CanFollowContract
 {
@@ -28,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail,CanBeFollowedContr
     use TwoFactorAuthenticatable;
     use CanFollow;
     use CanBeFollowed;
+    use Liker;
 
     static $rules = [
         'location' => 'max:16',

@@ -91,6 +91,12 @@ class UserReviews extends Component
 
         $allreviews = $allreviews->toArray();
 
+        $contador=0;
+        foreach ($allreviews as $review) {
+            $allreviews[$contador]["likes"]=Review::find($review["id"])->totalLikers;
+            $contador++;
+        }
+
         $temp = array_column($allreviews, "id_game");
         array_multisort($temp, SORT_ASC, $allreviews);
         

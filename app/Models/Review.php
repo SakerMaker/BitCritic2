@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Overtrue\LaravelLike\Traits\Likeable;
 
 class Review extends Model
 {
     use HasFactory;
+    use Likeable;
 
     static $rules = [
 		'id_game' => 'required',

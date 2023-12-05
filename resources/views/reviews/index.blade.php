@@ -58,12 +58,17 @@
                     <!-- Post content-->
                     <article>
                         <!-- Post header-->
-                        <header class="mb-4 rounded">
+                        <header class="mb-4 rounded d-flex flex-wrap flex-row justify-content-between align-items-end">
                             <!-- Post title-->
-                            <h1 class="fw-bolder mb-1">{{$review->title}}</h1>
-                            <!-- Post meta content-->
-                            <!-- Post categories-->
-                            <div class="text-light fst-italic mb-2" style="font-size:12px;">Publicado el {{substr($review->created_at,8,2)}}/{{substr($review->created_at,5,2)}}/{{substr($review->created_at,0,4)}} a las {{substr($review->created_at,11,5)}}</div>
+                            <div>
+                                <h1 class="fw-bolder mb-1">{{$review->title}}</h1>
+                                <!-- Post meta content-->
+                                <!-- Post categories-->
+                                <div class="text-light fst-italic" style="font-size:12px;">Publicado el {{substr($review->created_at,8,2)}}/{{substr($review->created_at,5,2)}}/{{substr($review->created_at,0,4)}} a las {{substr($review->created_at,11,5)}}</div>
+                            </div>
+                            <div class="col-lg-auto col-12">
+                                @livewire('like', ["review" => $review->id])
+                            </div>
                         </header>
                         <!-- Preview image figure-->
                         <!-- Post content-->

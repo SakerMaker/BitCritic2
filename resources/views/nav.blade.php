@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container" style="padding-bottom:129.219px;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="z-index:50">
     <div class="container">
         <a class="navbar-brand" href="{{ Route('index') }}">
             <img src="{{ url("img/BitCritic-Logo-View-Game-Review-Community.png") }}" alt="Logo" width="100" height="100" class="align-text-top me-2 logo--static">
@@ -8,7 +9,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse p-4 rounded-3" id="navbar--links">
+        <div class="collapse navbar-collapse p-4 pe-0 rounded-3" id="navbar--links">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item ms-lg-4 ms-0">
                     <a class="nav-link {{ ($current_page=="index" ? 'nav-link--active' : '') }}" href="{{ Route('index') }}">Inicio</a>
@@ -62,3 +63,4 @@
         </div>
     </div>
 </nav>
+</div>
