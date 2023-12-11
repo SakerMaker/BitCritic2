@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('email')->unique();
+            $table->text('name')->unique();
+            $table->text('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('location', 16)->nullable();
+            $table->text('password');
+            $table->text('location', 16)->nullable();
             $table->text('about_me', 4096)->nullable();
             $table->date('birthday')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 4096)->default('img/BitCritic-Profile-Picture-Default-View-Game-Review-Community.png')->nullable();
-            $table->string('banner_photo_path', 4096)->default('img/BitCritic-Banner-Default-View-Game-Review-Community.png')->nullable();
+            $table->text('profile_photo_path', 4096)->default('img/BitCritic-Profile-Picture-Default-View-Game-Review-Community.png')->nullable();
+            $table->text('banner_photo_path', 4096)->default('img/BitCritic-Banner-Default-View-Game-Review-Community.png')->nullable();
             $table->timestamps();
         });
     }
