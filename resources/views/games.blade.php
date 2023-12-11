@@ -46,7 +46,6 @@
                 </div>
               </form> --}}
         </div>
-        
         <livewire:show-games :page=0 :canSearch="true" perPage=100 columns=4/>
       <div>
       
