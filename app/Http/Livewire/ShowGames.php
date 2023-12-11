@@ -117,18 +117,6 @@ class ShowGames extends Component
                     $gamesIds[]=$game["id"];
                 }
             }
-            if ($games==NULL) {
-                $games= Game::whereLike("name","%".$this->search."%",false)->get()->toArray();
-                $contador=0;
-                foreach ($games as $game) {
-                    if (isset($game["first_release_date"])) {
-
-                        $games[$contador]["first_release_date"]=$game["first_release_date"]->valueOf();
-                    }
-                    $contador++;
-                }
-                
-            }
         } else {
             if ($this->previousSearch != null) {
                 $this->allGames=[];
