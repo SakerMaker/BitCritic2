@@ -117,21 +117,18 @@ class ShowGames extends Component
                     $gamesIds[]=$game["id"];
                 }
             }
-            // $perActualPage=$this->perPage;
-            // $perActualPage=$perActualPage-count($gamesIds);
-            // if ($perActualPage>0) {
-            //     $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNotIn("id",$gamesIds)->whereNotNull("total_rating_count")->orderBy("total_rating_count", "desc")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
-            //     $gamesIds=[0];
-            //     foreach ($games as $game) {
-            //         $perActualPage--;
-            //         $gamesIds[]=$game["id"];
-            //     }
-            // }
-            // $perActualPage=$this->perPage;
-            // $perActualPage=$perActualPage-count($gamesIds);
-            // if ($perActualPage>0) {
-            //     $games += $igdb->fuzzySearch(["name"], $this->search, false)->whereNull("total_rating_count")->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take((int)$this->perPage)->skip((int)$this->perPage * (int)$this->page)->get();
-            // }
+            if ($games==NULL) {
+                $games= Game::whereLike("name","%".$this->search."%",false)->get()->toArray();
+                $contador=0;
+                foreach ($games as $game) {
+                    if (isset($game["first_release_date"])) {
+
+                        $games[$contador]["first_release_date"]=$game["first_release_date"]->valueOf();
+                    }
+                    $contador++;
+                }
+                
+            }
         } else {
             if ($this->previousSearch != null) {
                 $this->allGames=[];
