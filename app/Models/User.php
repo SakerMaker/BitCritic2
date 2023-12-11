@@ -33,9 +33,9 @@ class User extends Authenticatable implements MustVerifyEmail,CanBeFollowedContr
 
     static $rules = [
         'location' => 'max:16',
-        'about_me' => 'max:16383',
+        'about_me' => 'max:4096',
         'profile_photo_path' => 'file|mimes:jpg,jpeg,png|max:4096',
-        'banner_photo_path' => 'file|mimes:jpg,jpeg,png|max:16382',
+        'banner_photo_path' => 'file|mimes:jpg,jpeg,png|max:4096',
     ];
 
     /**

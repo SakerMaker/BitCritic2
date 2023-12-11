@@ -18,12 +18,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('location', 16)->nullable();
-            $table->text('about_me', 16383)->nullable();
+            $table->text('about_me', 4096)->nullable();
             $table->date('birthday')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 4096)->default('img/BitCritic-Profile-Picture-Default-View-Game-Review-Community.png')->nullable();
-            $table->string('banner_photo_path', 16382)->default('img/BitCritic-Banner-Default-View-Game-Review-Community.png')->nullable();
+            $table->string('banner_photo_path', 4096)->default('img/BitCritic-Banner-Default-View-Game-Review-Community.png')->nullable();
             $table->timestamps();
         });
     }
