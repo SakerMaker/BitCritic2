@@ -15,7 +15,7 @@ class Review extends Model
 		'id_game' => 'required',
 		'id_user' => 'required',
         'title' => 'required|max:255|regex:/^[A-Za-z0-9 ]+$/',
-        'content' => 'required|alpha_dash:ascii',
+        'content' => 'required|regex:/^[A-Za-z0-9 ]+$/',
     ];
     
     protected $fillable = [
