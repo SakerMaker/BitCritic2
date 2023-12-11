@@ -36,6 +36,9 @@ class User extends Authenticatable implements MustVerifyEmail,CanBeFollowedContr
         'about_me' => 'max:4096',
         'profile_photo_path' => 'file|mimes:jpg,jpeg,png|max:4096',
         'banner_photo_path' => 'file|mimes:jpg,jpeg,png|max:4096',
+        'email' => 'max:320',
+        'password' => 'max:64',
+        'name' => 'max:16'
     ];
 
     /**
