@@ -14,8 +14,8 @@ class Review extends Model
     static $rules = [
 		'id_game' => 'required',
 		'id_user' => 'required',
-        'title' => 'required|max:255',
-        'content' => 'required',
+        'title' => 'required|max:255|alpha_dash:ascii',
+        'content' => 'required|alpha_dash:ascii',
     ];
     
     protected $fillable = [
