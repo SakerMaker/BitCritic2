@@ -84,7 +84,7 @@
                         {{ Form::hidden('id_user', Auth::id()) }}
                         {{ Form::text('title', "", ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => 'Título de la Review']) }}
                         {!! $errors->first('title', '<div class="invalid-feedback">:message</div>') !!}
-                        {{ Form::textarea('content', "", ['class' => 'form-control mt-4' . ($errors->has('content') ? ' is-invalid' : ''), 'placeholder' => 'Redacta tu Review']) }}
+                        {{ Form::textarea('content',"",['class'=>'form-control mt-4'.($errors->has('content')?'is-invalid':''),'placeholder'=>'Redacta tu Review']); }}
                         {!! $errors->first('content', '<div class="invalid-feedback">:message</div>') !!}
                         @guest
                             <a class="btn btn-lg btn-primary mt-4 mb-4 ms-auto" href="{{url("/login")}}">Enviar Review</a>

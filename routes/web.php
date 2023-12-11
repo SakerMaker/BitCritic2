@@ -46,6 +46,7 @@ Route::middleware([
     ])->group(function () {
     Route::get('/reviews/{review}', [ReviewController::class,'show'])->name('reviews.show');
     Route::post("/review/store", [ReviewController::class,'store'])->name('reviews.store');
+    Route::delete('/reviews/destroy/{review}', [ReviewController::class,'destroy'])->name('reviews.destroy');
     Route::post('/comments/store', [CommentController::class,'store'])->name('comments.store');
     Route::delete('/comments/destroy/{comment}', [CommentController::class,'destroy'])->name('comments.destroy');
     Route::get('/u/{name}', [UserController::class,'show'])->name('user.profile');

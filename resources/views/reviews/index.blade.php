@@ -74,16 +74,25 @@
                         <!-- Post content-->
                         <section class="mb-5" style="width:100%; word-wrap: break-word;">
                             <p class="fs-5 mb-4 p-4 border border-secondary rounded text-white" style="white-space: pre-line;">{{$review->content}}
-                            {{-- @if ($user->id==Auth::id())
-                            <form action="{{ route('reviews.destroy',$review->id) }}" method="POST" >
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="reviewUsuario">
-                                <button type="submit" class="text-white btn btn-secondary" style="float:right!important;"><i class="fa fa-fw fa-trash"></i> Borrar Review</button>
-                            </form>
-                            @else
-                            @endif --}}
-                            </p>
+                                {{-- @if ($user->id==Auth::id())
+                                    <form action="{{ route('reviews.destroy',$review->id) }}" method="POST" >
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="reviewUsuario">
+                                        <button type="submit" class="text-white btn btn-secondary" style="float:right!important;"><i class="fa fa-fw fa-trash"></i> Borrar Review</button>
+                                    </form>
+                                    @else
+                                    @endif --}}
+                                </p>
+                                <div>
+                                    @if ($review->id_user==Auth::id())
+                                    <form action="{{ route('reviews.destroy',$review->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-white btn btn-danger ms-auto d-block"><i class="fa fa-fw fa-trash"></i> Borrar Review</button>
+                                    </form>
+                                    @endif
+                                </div>
                         </section>
                         
                     </article>

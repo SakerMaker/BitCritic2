@@ -119,6 +119,14 @@ class ReviewController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $review = Review::find($id)->delete();
+
+        if(isset($_REQUEST['reviewUsuario'])){
+            return redirect()->route('index')
+            ->with('success', 'Review deleted successfully');
+        }else{
+            return redirect()->route('index')
+            ->with('success', 'Review deleted successfully');
+        }
     }
 }

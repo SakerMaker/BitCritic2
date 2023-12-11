@@ -92,7 +92,11 @@ class UserController extends Controller
         array_multisort($temp, SORT_DESC, $allreviews);
 
         // $followers=CountProfile::follow_count($user);
-        $likes=$user->totalLikes;
+        $posts = Review::where("id_user",$user->id)->withCount('likers')->get();
+        $likes=0;
+        foreach($posts as $post) {
+            $likes+=$post->likers_count;
+        }
         $comments=CountProfile::comments_count($user);
         $reviews=CountProfile::reviews_count($user);
         return view('user.profile', compact('user', "likes", "comments", "reviews", "allreviews"));
