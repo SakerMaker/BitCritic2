@@ -15,8 +15,8 @@
           focusable="false" style="object-fit: cover;">
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1 class="fw-bold">Juegos del Mes</h1>
-            <p class="fw-normal">Descubre cuáles son los juegos mejor valorados del mes.</p>
+            <h1 class="fw-bold">Juegos Populares</h1>
+            <p class="fw-normal">Descubre cuáles son los juegos más populares de la historia.</p>
             <p><a class="btn btn-lg btn-primary" href="#juegos">Descubrir</a></p>
           </div>
         </div>
@@ -59,7 +59,7 @@
       <div class="row gx-5 align-items-center justify-content-center">
         <div class="col-lg-8 col-xl-7 col-xxl-6">
           <div class="my-5 text-center text-xl-start">
-            <h1 class="display-5 fw-bold text-white mb-2">Escucha la comunidad, únete a la comunidad</h1>
+            <h1 class="display-5 fw-bold text-white mb-2">Lee, únete y comparte con la comunidad</h1>
             <p class="lead fw-normal text-white-50 mb-4">Lee todas las opiniones y reviews de la gente sobre tus juegos
               favoritos y aporta tu crítica para que todo el mundo la vea.</p>
             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
