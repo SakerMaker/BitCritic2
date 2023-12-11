@@ -22,8 +22,8 @@ return new class extends Migration
             $table->date('birthday')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->text('profile_photo_path', 4096)->default('img/BitCritic-Profile-Picture-Default-View-Game-Review-Community.png')->nullable();
-            $table->text('banner_photo_path', 4096)->default('img/BitCritic-Banner-Default-View-Game-Review-Community.png')->nullable();
+            $table->string('profile_photo_path', 4096)->default('img/BitCritic-Profile-Picture-Default-View-Game-Review-Community.png')->nullable();
+            $table->string('banner_photo_path', 4096)->default('img/BitCritic-Banner-Default-View-Game-Review-Community.png')->nullable();
             $table->timestamps();
         });
     }
