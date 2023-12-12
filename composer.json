@@ -17,6 +17,7 @@
         "marcreichel/igdb-laravel": "4.1",
         "overtrue/laravel-like": "^5.2",
         "spatie/async": "^1.6",
+        "spatie/laravel-cookie-consent": "^3.2",
         "spatie/laravel-permission": "^5.11",
         "vxm/laravel-async": "^4.1"
     },

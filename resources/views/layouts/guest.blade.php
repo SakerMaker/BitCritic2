@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        @include('cookie-consent::index')
         @hasSection("template_title")
         <title>@yield('template_title') - {{ config('app.name', 'BitCritic') }} - Comunidad de Reviews de Videojuegos</title>
         @else
@@ -55,5 +56,6 @@
             @include("footer")
             
         </div>
+        @include('cookie-consent::index')
     </body>
 </html>
