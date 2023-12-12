@@ -9,7 +9,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse p-4 pe-0 rounded-3" id="navbar--links">
+        <div class="collapse navbar-collapse p-4 px-0 rounded-3" id="navbar--links">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item ms-lg-4 ms-0">
                     <a class="nav-link {{ ($current_page=="index" ? 'nav-link--active' : '') }}" href="{{ Route('index') }}">Inicio</a>
