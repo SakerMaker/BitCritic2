@@ -14,7 +14,7 @@
                         </button>
                     </div>
                 </div>
-                <a href="/politica-de-privacidad" class="text-white-50 d-block pt-2">Ver Política de Cookies</a>
+                <a href="{{ Route('policy.show') }}" class="text-white-50 d-block pt-2">Ver Política de Cookies</a>
             </div>
         </div>
     </div>
