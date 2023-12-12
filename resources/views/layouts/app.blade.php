@@ -6,14 +6,12 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         @hasSection("template_title")
-        <title>@yield('template_title') - {{ config('app.name', 'BitCritic') }} - Comunidad de Reviews de Videojuegos</title>
+            <title>@yield('template_title') - {{ config('app.name', 'BitCritic') }} - Comunidad de Reviews de Videojuegos</title>
         @else
-        <title>{{ config('app.name', 'BitCritic') }} - Comunidad de Reviews de Videojuegos</title>
-
+            <title>{{ config('app.name', 'BitCritic') }} - Comunidad de Reviews de Videojuegos</title>
         @endif
         @hasSection("template_description")
             <meta name="description" content="@yield('template_description')">
-
         @else
             <meta name="description" content="Lee, escribe y comparte reviews con la comunidad. Lee todas las opiniones y reviews de la gente sobre tus juegos favoritos y aporta tu crítica para que todo el mundo la vea.">
         @endif
@@ -29,6 +27,7 @@
         <meta property="og:image:height" content="600">
         <meta property="og:image:type" content="image/jpeg">
         <meta name="twitter:card" content="summary_large_image">
+
         <!-- Fonts -->
         <link rel="shortcut icon" href="{{url("/favicon.ico")}}" type="image/x-icon">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
