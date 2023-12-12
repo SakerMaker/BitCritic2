@@ -17,7 +17,8 @@
         <meta property="og:title" content="@yield('template_title') - BitCritic - Comunidad de Reviews de Videojuegos">
         <meta property="og:description" content="Lee, escribe y comparte reviews con la comunidad. Lee todas las opiniones y reviews de la gente sobre tus juegos favoritos y aporta tu crítica para que todo el mundo la vea.">
         <meta property="og:site_name" content="BitCritic">
-        <meta property="og:image" content="img/BitCritic-Logo-View-Game-Review-Community_SEO.jpg">
+        <meta property="og:image" content="http://bitcritic.es/img/BitCritic-Logo-View-Game-Review-Community_SEO.jpg">
+        <meta property="og:image:secure_url" content="https://bitcritic.es/img/BitCritic-Logo-View-Game-Review-Community_SEO.jpg" /> 
         <meta property="og:image:width" content="1000">
         <meta property="og:image:height" content="600">
         <meta property="og:image:type" content="image/jpeg">
