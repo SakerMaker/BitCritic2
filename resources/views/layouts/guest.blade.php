@@ -26,7 +26,7 @@
         <meta property="og:image:width" content="1000">
         <meta property="og:image:height" content="600">
         <meta property="og:image:type" content="image/jpeg">
-        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:card" content="summary">
 
         <!-- Fonts -->
         <link rel="shortcut icon" href="{{url("/favicon.ico")}}" type="image/x-icon">
