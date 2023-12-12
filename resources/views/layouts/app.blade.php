@@ -5,7 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        @hasSection("template_title")
         <title>@yield('template_title') - {{ config('app.name', 'BitCritic') }} - Comunidad de Reviews de Videojuegos</title>
+        @else
+        <title>{{ config('app.name', 'BitCritic') }} - Comunidad de Reviews de Videojuegos</title>
+
+        @endif
         @hasSection("template_description")
             <meta name="description" content="@yield('template_description')">
 
@@ -14,6 +19,7 @@
         @endif
         <meta property="og:locale" content="es_ES">
         <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ url()->current() }}" />
         <meta property="og:title" content="@yield('template_title') - BitCritic - Comunidad de Reviews de Videojuegos">
         <meta property="og:description" content="Lee, escribe y comparte reviews con la comunidad. Lee todas las opiniones y reviews de la gente sobre tus juegos favoritos y aporta tu crítica para que todo el mundo la vea.">
         <meta property="og:site_name" content="BitCritic">

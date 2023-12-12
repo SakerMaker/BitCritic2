@@ -19,6 +19,7 @@
         @endif
         <meta property="og:locale" content="es_ES">
         <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ url()->current() }}" />
         <meta property="og:title" content="@yield('template_title') - BitCritic - Comunidad de Reviews de Videojuegos">
         <meta property="og:description" content="Lee, escribe y comparte reviews con la comunidad. Lee todas las opiniones y reviews de la gente sobre tus juegos favoritos y aporta tu crítica para que todo el mundo la vea.">
         <meta property="og:site_name" content="BitCritic">
@@ -27,7 +28,7 @@
         <meta property="og:image:width" content="1000">
         <meta property="og:image:height" content="600">
         <meta property="og:image:type" content="image/jpeg">
-        <meta name="twitter:card" content="summary">
+        <meta name="twitter:card" content="summary_large_image">
 
         <!-- Fonts -->
         <link rel="shortcut icon" href="{{url("/favicon.ico")}}" type="image/x-icon">
