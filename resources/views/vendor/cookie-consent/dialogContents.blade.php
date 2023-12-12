@@ -1,4 +1,4 @@
-<div class="fixed-bottom w-75 mx-auto bg-primary m-2 rounded-3 px-4 py-3 cookies-modal">
+<div class="fixed-bottom w-75 mx-auto bg-primary m-2 rounded-3 px-4 py-3 cookies-modal shadow">
     <div class="js-cookie-consent cookie-consent">
         <div class="mx-auto">
             <div class="p-2">
