@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\PanelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Middleware\RedirectIfNotProfileUser;
@@ -53,4 +54,14 @@ Route::middleware([
     Route::get('/u/{name}/edit', [UserController::class,'edit'])->name('user.edit')->middleware(RedirectIfNotProfileUser::class);
     Route::put('/u/{name}/update', [UserController::class,'update'])->name('user.update');
     Route::get('/feed', [FeedController::class, 'index'])->name('feed.index');
+    Route::group(['middleware' => ['role:Admin']], function () {
+        Route::get('/panel', [PanelController::class,'index'])->name('panel.index');
+        Route::get('/panel/comments', [PanelController::class,'comments'])->name('panel.comments');
+        Route::get('/panel/reviews', [PanelController::class,'reviews'])->name('panel.reviews');
+        Route::get('/panel/users', [PanelController::class,'users'])->name('panel.users');
+        Route::delete('/panel/users/{user}/destroy', [PanelController::class,'users_destroy'])->name('panel.user.destroy');
+        Route::delete('/panel/reviews/{review}/destroy', [PanelController::class,'reviews_destroy'])->name('panel.review.destroy');
+        Route::delete('/panel/comments/{comment}/destroy', [PanelController::class,'comments_destroy'])->name('panel.comment.destroy');
+    });
 });
+

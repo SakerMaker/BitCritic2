@@ -45,6 +45,11 @@
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 <span class="span-text">{{ __('Configuración') }}</span>
                             </x-dropdown-link>
+                            @if (Auth::user()->hasRole("Admin"))
+                            <x-dropdown-link href="{{ route('panel.index') }}">
+                                <span class="span-text">{{ __('Administración') }}</span>
+                            </x-dropdown-link>
+                            @endif
     
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
