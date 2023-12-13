@@ -49,6 +49,7 @@
 
                                             <td>
                                                 <form action="{{ route('panel.comment.destroy',$comment->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-success" href="{{ route('reviews.show',$comment->id_review) }}"><i class="fa fa-fw fa-edit"></i> Ver</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Borrar</button>
