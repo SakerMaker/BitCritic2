@@ -38,12 +38,12 @@ class PanelController extends Controller
     public function users_destroy($id) {
         $user = User::find($id);
 
-        if ($user['profile_photo_path'] != "img/profileDefault.png") {
+        if (!str_starts_with($user['profile_photo_path'],"img")) {
             if(file_exists($user['profile_photo_path'])){
                 unlink($user['profile_photo_path']);
             }
         }
-        if ($user['banner_photo_path'] != "img/bannerDefault.png") {
+        if (!str_starts_with($user['banner_photo_path'],"img")) {
             if(file_exists($user['banner_photo_path'])){
                 unlink($user['banner_photo_path']);
             }
