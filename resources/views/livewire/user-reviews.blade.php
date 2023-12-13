@@ -20,7 +20,7 @@
           
         <div class="card-body p-4">
           <div class="d-flex flex-row align-content-center flex-wrap align-items-end justify-content-between">
-              <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{"@"}}{{Auth::user()->name}}</div>
+              <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{"@"}}{{$user->name}}</div>
               <div>{{$review["likes"]}}<i class="ms-2 bi bi-hand-thumbs-up lead"></i></div>
           </div>
           <a class="text-decoration-none link-dark stretched-link" href="{{url("/reviews")."/".$review["id"]}}">
