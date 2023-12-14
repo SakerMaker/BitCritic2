@@ -18,7 +18,7 @@
     @foreach ($games as $game)
 
     
-    <div class="col-md-{{12/(int)$columns}} col-12 mb-5 p-0 ps-md-{{(4+1)-(int)$columns}} ps-lg-{{(6+1)-(int)$columns}} pe-md-{{(4+1)-(int)$columns}} pe-lg-{{(6+1)-(int)$columns}}" wire:key="{{$game["id"]}}">
+    <div class="col-lg-{{12/(int)$columns}} col-md-6 col-12 mb-5 p-0 ps-md-{{(4+1)-(int)$columns}} ps-lg-{{(6+1)-(int)$columns}} pe-md-{{(4+1)-(int)$columns}} pe-lg-{{(6+1)-(int)$columns}}" wire:key="{{$game["id"]}}">
         <div class="card h-100 shadow border-0">
           <a href="{{url("/games") . "/" .$game['id']}}" class="fill-div-link"></a>
           <div class="card-game">
