@@ -73,7 +73,7 @@
                         <!-- Preview image figure-->
                         <!-- Post content-->
                         <section class="mb-5" style="width:100%; word-wrap: break-word;">
-                            <p class="fs-5 mb-4 p-4 border border-secondary rounded text-white pb-0" style="white-space: pre-line;">{{$review->content}}
+                            <p class="fs-5 mb-4 p-4 border border-secondary rounded text-white" style="white-space: pre-line;">{{trim($review->content)}}
                                 {{-- @if ($user->id==Auth::id())
                                     <form action="{{ route('reviews.destroy',$review->id) }}" method="POST" >
                                         @csrf
