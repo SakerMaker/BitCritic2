@@ -4,7 +4,7 @@
   @if (!Route::is("index") && $canSearch!=false)
   <div class="col-lg-12 pe-3 ps-3">
     <div class="ms-auto col-lg-12 mb-4 p-0 form-floating">
-      <input type="text" wire:model.live="search" class="form-control"/>
+      <input type="text" wire:model="search" class="form-control"/>
       <label class="form-label">Buscar</label>
     </div>
   </div>
@@ -13,7 +13,6 @@
     <div wire:loading><img src="{{ url("img/loading.gif")}}" alt="" style="width:50px;" class="mb-4"></div>
 </div>
   @endif
-  
   @foreach ($allGames as $games)
     @foreach ($games as $game)
 

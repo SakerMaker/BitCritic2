@@ -27,9 +27,8 @@ class ShowGames extends Component
     public $canLoadButton;
     protected $listeners = ['refreshProducts' => '$refresh'];
 
-    public function mount($perPage = 9, $search = "", $canSearch = false, $allGames = [], $columns = 3, $canLoadMore = true, $canLoadButton = true) {
+    public function mount($perPage = 9, $canSearch = false, $allGames = [], $columns = 3, $canLoadMore = true, $canLoadButton = true) {
         $this->perPage = $perPage;
-        $this->search = $search;
         $this->canSearch = $canSearch;
         $this->allGames = $allGames;
         $this->columns = $columns;
