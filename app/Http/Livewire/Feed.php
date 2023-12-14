@@ -62,7 +62,16 @@ class Feed extends Component
                 foreach ($allreviews as $review) {
                     $games_id[]=$review->id_game;
                     $users[]=User::find($review->id_user)->toArray();
-                    $games[]=$igdb->where("id",$review->id_game)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->first();
+                }
+                if (count(array_unique($games_id))!=count($games_id)) {
+                    $dups = array();
+                    foreach(array_count_values($games_id) as $val => $c)
+                        if($c > 1) $dups[] = $val;
+
+                    $games=$igdb->whereIn("id",$games_id)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(count($allreviews)-count($dups))->get();
+                    $games=array_merge($games,$igdb->whereIn("id",$dups)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(count($allreviews)-count(array_unique($games_id)))->get());
+                } else {
+                    $games=$igdb->whereIn("id",$games_id)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(count($allreviews))->get();
                 }
 
                 $covers["cover"]=[];
@@ -115,6 +124,8 @@ class Feed extends Component
     
             $temp = array_column($allreviews, "id_game");
             array_multisort($temp, SORT_ASC, $allreviews);
+            $temp2 = array_column($games, "id");
+            array_multisort($temp2, SORT_ASC, $games);
             
             $contador=0;
             foreach ($allreviews as $review) {
