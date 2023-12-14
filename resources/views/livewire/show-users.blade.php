@@ -25,11 +25,11 @@
           <div class="card h-100 shadow border-0">
             <a href="{{url("/u") . "/" .$user["name"]}}" class="fill-div-link"></a>
             <div>
-              <div style="background:url(@if (str_contains($user->profile_photo_path, 'Profile-Picture-Default')){{url($user->profile_photo_path)}}@else{{url("/storage/".$user->profile_photo_path)}}@endif);background-size: cover;background-position: center center;background-repeat: no-repeat; " class="card-game-parent-div">            
+              <div style="background:url(@if (str_contains($user["profile_photo_path"], 'Profile-Picture-Default')){{url($user["profile_photo_path"])}}@else{{url("/storage/".$user["profile_photo_path"])}}@endif);background-size: cover;background-position: center center;background-repeat: no-repeat; " class="card-game-parent-div">            
                 {{-- <div style="position:relative;overflow:hidden;padding-bottom:100%;"> --}}
                 <div class="d-flex flex-wrap align-content-center card-game-child-div">
                   {{-- <img class="img img-responsive full-width" style="position:absolute;width:100%;" src="{{$game["cover"]}}" alt="..." /> --}}
-                  <img class="img img-responsive card-game-image w-100" src="@if (str_contains($user->profile_photo_path, 'Profile-Picture-Default')){{url($user->profile_photo_path)}}@else{{url("/storage/".$user->profile_photo_path)}}@endif" alt="..." />
+                  <img class="img img-responsive card-game-image w-100" src="@if (str_contains($user["profile_photo_path"], 'Profile-Picture-Default')){{url($user["profile_photo_path"])}}@else{{url("/storage/".$user["profile_photo_path"])}}@endif" alt="..." />
                 </div>
               </div>
             </div>
