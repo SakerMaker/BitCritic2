@@ -64,12 +64,11 @@ class Feed extends Component
                     $users[]=User::find($review->id_user)->toArray();
                 }
                 if (count(array_unique($games_id))!=count($games_id)) {
-                    $dups = array();
-                    foreach(array_count_values($games_id) as $val => $c)
-                        if($c > 1) $dups[] = $val;
-
+                    $dups = array_diff_assoc( $games_id, array_unique( $games_id ) );
                     $games=$igdb->whereIn("id",$games_id)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(count($allreviews)-count($dups))->get();
-                    $games=array_merge($games,$igdb->whereIn("id",$dups)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(count($allreviews)-count(array_unique($games_id)))->get());
+                    foreach ($dups as $dup) {
+                        $games=array_merge($games,$igdb->where("id",$dup)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->get());
+                    }
                 } else {
                     $games=$igdb->whereIn("id",$games_id)->select(["id","name","genres","summary","first_release_date","cover","total_rating_count"])->take(count($allreviews))->get();
                 }
