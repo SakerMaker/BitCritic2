@@ -1,4 +1,4 @@
-<div class="mt-5">
+<div class="mt-5" id="searchUsers">
     <div class="row gx-5 justify-content-center mt-5">
         <div class="col-lg-12 col-xl-6 mt-5">
           <div class="text-center text-dark">

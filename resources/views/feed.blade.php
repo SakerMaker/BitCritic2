@@ -12,6 +12,7 @@
                 <p class="lead fw-normal text-white-50 mb-4">Lee las reviews de las personas a las que sigues.</p>
                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                   <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#search">Leer</a>
+                  <a class="btn btn-light btn-lg px-4 me-sm-3" href="#searchUsers">Buscar Usuarios</a>
                 </div>
               </div>
             </div>
