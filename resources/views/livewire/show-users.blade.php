@@ -3,7 +3,6 @@
         <div class="col-lg-12 col-xl-6 mt-5">
           <div class="text-center text-dark">
             <h2 class="fw-bolder mb-3" id="buscar">Buscar Usuarios</h2>
-            
           </div>
         </div>
       </div>
