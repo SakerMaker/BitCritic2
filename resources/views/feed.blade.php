@@ -48,7 +48,7 @@
             </div>
             
             @livewire('feed', ['page' => 0])
-            @livewire('show-users', ['search' => $search])
+            @livewire('show-users')
           <div>
           
           
