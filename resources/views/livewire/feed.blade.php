@@ -5,7 +5,7 @@
     @foreach ($allreviews as $reviews)
     @foreach ($reviews as $review)
 
-                  <div class="col-md-3 col-12 mb-5 p-0 ps-md-1 ps-lg-3 pe-md-1 pe-lg-3" wire:key="{{$review["id"]}}">
+                  <div class="col-lg-3 col-md-6 col-12 mb-5 p-0 ps-md-1 ps-lg-3 pe-md-1 pe-lg-3" wire:key="{{$review["id"]}}">
                     <div class="card h-100 shadow border-0">
                       <a href="{{url("/reviews")."/".$review["id"]}}" class="fill-div-link"></a>
                       <div class="card-game">
